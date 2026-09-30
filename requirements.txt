@@ -1,0 +1,11 @@
+spacy>=3.7
+https://github.com/explosion/spacy-models/releases/download/en_core_web_lg-3.8.0/en_core_web_lg-3.8.0-py3-none-any.whl
+pypdf>=4.0
+neo4j>=5.20
+networkx>=3.0
+pandas>=2.0
+python-dotenv>=1.0
+pyyaml>=6.0
+pytest>=8.0
+reportlab>=4.0
+streamlit>=1.40

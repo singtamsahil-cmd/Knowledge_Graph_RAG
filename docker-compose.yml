@@ -1,0 +1,61 @@
+services:
+  neo4j:
+    image: neo4j:5-community
+    container_name: kg-neo4j
+    ports:
+      - "7474:7474"
+      - "7687:7687"
+    environment:
+      - NEO4J_AUTH=${NEO4J_USERNAME:-neo4j}/${NEO4J_PASSWORD:-change_this_password}
+    volumes:
+      - neo4j_data:/data
+    healthcheck:
+      test: ["CMD-SHELL", "cypher-shell -u ${NEO4J_USERNAME:-neo4j} -p ${NEO4J_PASSWORD:-change_this_password} 'RETURN 1' || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+      start_period: 20s
+
+  app:
+    build: .
+    container_name: kg-app
+    depends_on:
+      neo4j:
+        condition: service_healthy
+    environment:
+      - NEO4J_URI=bolt://neo4j:7687
+      - NEO4J_USERNAME=${NEO4J_USERNAME:-neo4j}
+      - NEO4J_PASSWORD=${NEO4J_PASSWORD:-change_this_password}
+      - NEO4J_DATABASE=${NEO4J_DATABASE:-neo4j}
+      - SPACY_MODEL=en_core_web_lg
+      - LOG_LEVEL=${LOG_LEVEL:-INFO}
+    volumes:
+      - ./data/input:/app/data/input:ro
+      - ./outputs:/app/outputs
+    entrypoint: ["python", "main.py"]
+    command: ["--help"]
+
+  frontend:
+    build: .
+    container_name: kg-frontend
+    depends_on:
+      neo4j:
+        condition: service_healthy
+    environment:
+      - NEO4J_URI=bolt://neo4j:7687
+      - NEO4J_USERNAME=${NEO4J_USERNAME:-neo4j}
+      - NEO4J_PASSWORD=${NEO4J_PASSWORD:-change_this_password}
+      - NEO4J_DATABASE=${NEO4J_DATABASE:-neo4j}
+      - SPACY_MODEL=en_core_web_lg
+      - LOG_LEVEL=${LOG_LEVEL:-INFO}
+    ports:
+      - "8501:8501"
+    volumes:
+      - ./data/input:/app/data/input
+      - ./outputs:/app/outputs
+    entrypoint: ["streamlit", "run", "frontend/app.py",
+                 "--server.address=0.0.0.0", "--server.port=8501"]
+    command: []
+
+volumes:
+  neo4j_data:
