@@ -20,16 +20,17 @@ def test_delete_document_runs_surgical_parameterized_queries():
 
     result = store.delete_document("gone.pdf")
 
-    # 5 statements: exclusive edges, shared-edge scrub, doc node,
-    # entity scrub, orphan cleanup.
-    assert session.run.call_count == 5
+    # 7 statements: exclusive edges, shared-edge scrub, doc node,
+    # entity scrub, orphan cleanup, event scrub, orphan-event cleanup.
+    assert session.run.call_count == 7
     for c in session.run.call_args_list:
         assert isinstance(c.args[0], str)  # Cypher text, never f-string values
     doc_scoped = [c for c in session.run.call_args_list if c.kwargs.get("doc") == "gone.pdf"]
-    assert len(doc_scoped) == 4  # orphan cleanup is global by construction
+    assert len(doc_scoped) == 5  # orphan cleanups are global by construction
     assert set(result) == {"relations_deleted", "relations_scrubbed",
                            "documents_deleted", "entities_scrubbed",
-                           "orphan_entities_deleted"}
+                           "orphan_entities_deleted", "events_scrubbed",
+                           "orphan_events_deleted"}
 
 
 def test_list_documents_returns_rows():

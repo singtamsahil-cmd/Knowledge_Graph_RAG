@@ -1,0 +1,3418 @@
+[
+  {
+    "id": "entity_8bc6bb485cc8",
+    "name": "Business and Organization Relationships\nMeridian Technologies Pvt Ltd",
+    "normalized_name": "business and organization relationships meridian technologies",
+    "entity_type": "ORG",
+    "mentions": "Business and Organization Relationships\nMeridian Technologies Pvt Ltd|Meridian Technologies Pvt Ltd",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_dbab4b081bac",
+    "name": "Compliance Department\nClassification",
+    "normalized_name": "compliance department classification",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "Compliance Department\nClassification|The department",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_d38173f523a0",
+    "name": "revised installation\ninstructions",
+    "normalized_name": "revised installation instructions",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "revised installation\ninstructions",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_d190f2090b60",
+    "name": "Bengaluru Technology Park Branch",
+    "normalized_name": "bengaluru technology park branch",
+    "entity_type": "ORG",
+    "mentions": "Bengaluru Technology Park Branch|Bengaluru Technology Park\nBranch|BRANCH|the branch",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_abad6b6b9075",
+    "name": "the Operations Improvement Programme",
+    "normalized_name": "operations improvement programme",
+    "entity_type": "ORG",
+    "mentions": "the Operations Improvement Programme|Improvement Programme|the improvement programme|Operations|The programme",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_b7087ef0e61a",
+    "name": "Selected Transaction Activities",
+    "normalized_name": "selected transaction activities",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "Selected Transaction Activities|The transaction|the transaction|A transaction|TRANSACTION",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_5902b870986c",
+    "name": "relevant transaction references",
+    "normalized_name": "relevant transaction references",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "relevant transaction references|Transaction references",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_a8d119435bf4",
+    "name": "the quarterly improvement programme",
+    "normalized_name": "quarterly improvement programme",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "the quarterly improvement programme",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_64564caaed04",
+    "name": "customer\nonboarding activities",
+    "normalized_name": "customer onboarding activities",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "customer\nonboarding activities|CUSTOMER_OF|a customer|customer|Customer",
+    "documents": "fictional_bank_annual_operations_report.pdf|manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_d1ab87457e43",
+    "name": "customer identity verification",
+    "normalized_name": "customer identity verification",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "customer identity verification",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_4944906fed18",
+    "name": "customer\nidentification status",
+    "normalized_name": "customer identification status",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "customer\nidentification status|Status",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_01acbb3d63d0",
+    "name": "the Central Distribution Warehouse",
+    "normalized_name": "central distribution warehouse",
+    "entity_type": "ORG",
+    "mentions": "the Central Distribution Warehouse|a central distribution\nwarehouse|the warehouse",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_6da767994c87",
+    "name": "Rivergate CNC machining centre",
+    "normalized_name": "rivergate cnc machining centre",
+    "entity_type": "ORG",
+    "mentions": "Rivergate CNC machining centre|Rivergate|machining|CNC",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_4f74db701e76",
+    "name": "selected financial activities",
+    "normalized_name": "selected financial activities",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "selected financial activities",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_3a522c60b3ea",
+    "name": "his linked investment\naccount",
+    "normalized_name": "his linked investment account",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "his linked investment\naccount|His account|The\naccount|The account|ACCOUNT",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_2e82b45581ee",
+    "name": "a corporate salary relationship",
+    "normalized_name": "corporate salary relationship",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "a corporate salary relationship|relationship",
+    "documents": "fictional_bank_annual_operations_report.pdf|manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_818a5aba4980",
+    "name": "Knowledge Graph Testing Notes",
+    "normalized_name": "knowledge graph testing notes",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "Knowledge Graph Testing Notes",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_3470a8de3e31",
+    "name": "14 Meridian Industrial Estate",
+    "normalized_name": "14 meridian industrial estate",
+    "entity_type": "ORG",
+    "mentions": "14 Meridian Industrial Estate",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_3a0dfa203e7b",
+    "name": "weekly preventive inspections",
+    "normalized_name": "weekly preventive inspections",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "weekly preventive inspections",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_e2047b1098f9",
+    "name": "knowledge graph construction",
+    "normalized_name": "knowledge graph construction",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "knowledge graph construction|knowledge-graph construction",
+    "documents": "fictional_bank_annual_operations_report.pdf|manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_511394807712",
+    "name": "higher-pressure applications",
+    "normalized_name": "higher pressure applications",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "higher-pressure applications",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_bddc15a60eae",
+    "name": "Bank Profile\nNorthStar Bank",
+    "normalized_name": "bank profile northstar bank",
+    "entity_type": "ORG",
+    "mentions": "Bank Profile\nNorthStar Bank|NorthStar Bank|Northstar|The bank|the bank|BANK",
+    "documents": "fictional_bank_annual_operations_report.pdf|manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_418aa9797bd9",
+    "name": "business banking operations",
+    "normalized_name": "business banking operations",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "business banking operations|Banking Operations|business banking|The\nbusiness",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_8d5fbf525ddb",
+    "name": "its Current Account CA20001",
+    "normalized_name": "its current account ca20001",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "its Current Account CA20001|Current Account CA20001|Current Account\nCA20001",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_01ece244e881",
+    "name": "The following entity categories",
+    "normalized_name": "following entity categories",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "The following entity categories|Entity",
+    "documents": "fictional_bank_annual_operations_report.pdf|manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_47d161b11090",
+    "name": "centrifugal pump assemblies",
+    "normalized_name": "centrifugal pump assemblies",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "centrifugal pump assemblies|pump assemblies",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_9ba87d7b3864",
+    "name": "96%\nSeal dimension variation",
+    "normalized_name": "96 seal dimension variation",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "96%\nSeal dimension variation|96%",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_956d8ebefcb8",
+    "name": "mechanical seal compression",
+    "normalized_name": "mechanical seal compression",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "mechanical seal compression",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_cd0f575ff1fd",
+    "name": "the administrative head office",
+    "normalized_name": "administrative head office",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "the administrative head office|Its head office",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_525d61241d2a",
+    "name": "industrial pump assemblies",
+    "normalized_name": "industrial pump assemblies",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "industrial pump assemblies",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_0e7995973453",
+    "name": "food-processing\nfacilities",
+    "normalized_name": "food processing facilities",
+    "entity_type": "ORG",
+    "mentions": "food-processing\nfacilities|facilities|Facilities",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_c875ff9062d7",
+    "name": "stainless-steel components",
+    "normalized_name": "stainless steel components",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "stainless-steel components|stainless steel|Components",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_9dba4fe99941",
+    "name": "retail account operations",
+    "normalized_name": "retail account operations",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "retail account operations",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_ad8a0b286853",
+    "name": "Rivergate Plant\nMachining",
+    "normalized_name": "rivergate plant machining",
+    "entity_type": "FAC",
+    "mentions": "Rivergate Plant\nMachining|Rivergate Plant",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_dab445d00b1a",
+    "name": "Its manufacturing network",
+    "normalized_name": "its manufacturing network",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "Its manufacturing network",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_f72dcf429714",
+    "name": "electrical safety testing",
+    "normalized_name": "electrical safety testing",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "electrical safety testing",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_fffacfa7f232",
+    "name": "an updated inspection record",
+    "normalized_name": "updated inspection record",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "an updated inspection record",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_e507d8f268f3",
+    "name": "corrective action CAPA-26",
+    "normalized_name": "corrective action capa 26",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "corrective action CAPA-26|the action",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_2ebe0b888388",
+    "name": "small business customers",
+    "normalized_name": "small business customers",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "small business customers|a small business|customers",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_c15b6ffd0960",
+    "name": "These relationship names",
+    "normalized_name": "these relationship names",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "These relationship names",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_727423b1b8b6",
+    "name": "the\nnatural-language content",
+    "normalized_name": "natural language content",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "the\nnatural-language content",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_696204fb2cd3",
+    "name": "Rivergate Plant\nAssembly",
+    "normalized_name": "rivergate plant assembly",
+    "entity_type": "FAC",
+    "mentions": "Rivergate Plant\nAssembly|assembly",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_cdf96ccc667b",
+    "name": "The principal product family",
+    "normalized_name": "principal product family",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "The principal product family",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_52fae6fee81c",
+    "name": "a stainless-steel impeller",
+    "normalized_name": "stainless steel impeller",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "a stainless-steel impeller",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_e8a6f02ac164",
+    "name": "a lockout-tagout refresher",
+    "normalized_name": "lockout tagout refresher",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "a lockout-tagout refresher",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_471fd6c0438a",
+    "name": "supplier process\nreviews",
+    "normalized_name": "supplier process reviews",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "supplier process\nreviews|The supplier|reviews",
+    "documents": "manufacturing_operations_report.pdf|fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_0158023fc026",
+    "name": "Synthetic Test Document",
+    "normalized_name": "synthetic test document",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "Synthetic Test Document|the document",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_39c832df232b",
+    "name": "relationship\nextraction",
+    "normalized_name": "relationship extraction",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "relationship\nextraction|relationship extraction",
+    "documents": "fictional_bank_annual_operations_report.pdf|manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_c5d55fe2b9e7",
+    "name": "this reporting exercise",
+    "normalized_name": "this reporting exercise",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "this reporting exercise",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_44475f62c727",
+    "name": "Savings Account SA10001",
+    "normalized_name": "savings account sa10001",
+    "entity_type": "PRODUCT",
+    "mentions": "Savings Account SA10001|SA10001\nSavings|Savings Account|Savings Account SA10002|SA10002",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_29ee0f89ec45",
+    "name": "Branch Responsibilities",
+    "normalized_name": "branch responsibilities",
+    "entity_type": "ORG",
+    "mentions": "Branch Responsibilities",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_0cdfcc74f6ea",
+    "name": "personal loan servicing",
+    "normalized_name": "personal loan servicing",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "personal loan servicing|The loan|the loan|a loan|LOAN",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_e3307fb3e780",
+    "name": "digital banking support",
+    "normalized_name": "digital banking support",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "digital banking support",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_82a55c610763",
+    "name": "unique\nloan identifiers",
+    "normalized_name": "unique loan identifiers",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "unique\nloan identifiers|identifiers",
+    "documents": "fictional_bank_annual_operations_report.pdf|manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_ed793521f2f0",
+    "name": "Potential relationships",
+    "normalized_name": "potential relationships",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "Potential relationships|relationships",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_995eb63ff2ba",
+    "name": "97.5%\nUnplanned downtime",
+    "normalized_name": "97 5 unplanned downtime",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "97.5%\nUnplanned downtime|unplanned downtime|97.5%|97%",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_75e6c37c913c",
+    "name": "final visual inspection",
+    "normalized_name": "final visual inspection",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "final visual inspection|final inspection",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_ba5169157c0d",
+    "name": "purchase order PO-26418",
+    "normalized_name": "purchase order po 26418",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "purchase order PO-26418",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_23c85bcdefb2",
+    "name": "a daily verification step",
+    "normalized_name": "daily verification step",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "a daily verification step",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_f3146eb9cd08",
+    "name": "packaged food\nproducts",
+    "normalized_name": "packaged food products",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "packaged food\nproducts|Products|products",
+    "documents": "fictional_bank_annual_operations_report.pdf|manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_51a00f76d8fa",
+    "name": "The sanctioned loan\namount",
+    "normalized_name": "sanctioned loan amount",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "The sanctioned loan\namount|The sanctioned amount",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_01edcab7fed9",
+    "name": "The Credit Risk Department",
+    "normalized_name": "credit risk department",
+    "entity_type": "ORG",
+    "mentions": "The Credit Risk Department|the Credit Risk Department",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_7100d16c3a2a",
+    "name": "structured annotations",
+    "normalized_name": "structured annotations",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "structured annotations",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_27c066b0142a",
+    "name": "water-treatment plants",
+    "normalized_name": "water treatment plants",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "water-treatment plants",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_f28309eab769",
+    "name": "Lakeside Plant\nQuality",
+    "normalized_name": "lakeside plant quality",
+    "entity_type": "ORG",
+    "mentions": "Lakeside Plant\nQuality|Lakeside Plant|Lakeside",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_7ab82d7f7c03",
+    "name": "Leena Bose\nReplacement",
+    "normalized_name": "leena bose replacement",
+    "entity_type": "PERSON",
+    "mentions": "Leena Bose\nReplacement|Leena Bose",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_d8f8ce87262f",
+    "name": "non-conformance report",
+    "normalized_name": "non conformance report",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "non-conformance report|REPORT",
+    "documents": "manufacturing_operations_report.pdf|fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_0568faeb0a50",
+    "name": "The Mumbai Central Branch",
+    "normalized_name": "mumbai central branch",
+    "entity_type": "ORG",
+    "mentions": "Mumbai Central Branch|The Mumbai Central Branch|the Mumbai Central Branch",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_496ad27b6855",
+    "name": "The Chennai Marina Branch",
+    "normalized_name": "chennai marina branch",
+    "entity_type": "ORG",
+    "mentions": "Chennai Marina Branch|The Chennai Marina Branch|the Chennai Marina Branch",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_99cae123f455",
+    "name": "Rahul Sharma\nSoftware",
+    "normalized_name": "rahul sharma software",
+    "entity_type": "PERSON",
+    "mentions": "Rahul Sharma\nSoftware|Rahul Sharma|Rahul Sharma's",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_8f5ef41e4242",
+    "name": "the Chennai Marina Branch",
+    "normalized_name": "chennai marina branch",
+    "entity_type": "FAC",
+    "mentions": "the Chennai Marina Branch",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_7c335b90dbf9",
+    "name": "Business Loan LN30002",
+    "normalized_name": "business loan ln30002",
+    "entity_type": "ORG",
+    "mentions": "Business Loan LN30002|Business Loan",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_7b50af9e7c8a",
+    "name": "Rahul Sharma\nPersonal",
+    "normalized_name": "rahul sharma personal",
+    "entity_type": "PERSON",
+    "mentions": "Rahul Sharma\nPersonal",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_fd069b4cb8db",
+    "name": "Sunrise Retail Stores",
+    "normalized_name": "sunrise retail stores",
+    "entity_type": "ORG",
+    "mentions": "Sunrise Retail Stores",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_0d1e8ebe5967",
+    "name": "Personal Loan LN30001",
+    "normalized_name": "personal loan ln30001",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "Personal Loan LN30001",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_c4b16cca31a3",
+    "name": "The transaction reference",
+    "normalized_name": "transaction reference",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "The transaction reference",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_9692ea451442",
+    "name": "this synthetic report",
+    "normalized_name": "this synthetic report",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "this synthetic report|This report|this report",
+    "documents": "fictional_bank_annual_operations_report.pdf|manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_47ec262b9449",
+    "name": "an external organization",
+    "normalized_name": "external organization",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "an external organization|ORGANIZATION",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_9d67f741536a",
+    "name": "pump casing machining",
+    "normalized_name": "pump casing machining",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "pump casing machining",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_8102e9439a00",
+    "name": "Priya Nair\nMonitoring",
+    "normalized_name": "priya nair monitoring",
+    "entity_type": "PERSON",
+    "mentions": "Priya Nair\nMonitoring|Priya Nair",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_4cab6c6d06ba",
+    "name": "Workforce\nMaintenance",
+    "normalized_name": "workforce maintenance",
+    "entity_type": "ORG",
+    "mentions": "Workforce\nMaintenance",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_f0c7d69a3a49",
+    "name": "No\nlost-time injuries",
+    "normalized_name": "no lost time injuries",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "No\nlost-time injuries|time",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_ff77b8928ddb",
+    "name": "Example relationships",
+    "normalized_name": "example relationships",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "Example relationships",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_a621d4fb920b",
+    "name": "Priya Singh\nBusiness",
+    "normalized_name": "priya singh business",
+    "entity_type": "PERSON",
+    "mentions": "Priya Singh\nBusiness|Priya Singh|Priya\nSingh",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_c20f3519d157",
+    "name": "Northstar Components Ltd.",
+    "normalized_name": "northstar components",
+    "entity_type": "ORG",
+    "mentions": "Northstar Components Ltd.",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_e623deab0966",
+    "name": "industrial customers",
+    "normalized_name": "industrial customers",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "industrial customers",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_f04910914665",
+    "name": "electric drive motor",
+    "normalized_name": "electric drive motor",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "electric drive motor",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_a9796f1a8ae4",
+    "name": "Supplier performance",
+    "normalized_name": "supplier performance",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "Supplier performance",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_848730a4eb3b",
+    "name": "Next-Quarter Actions",
+    "normalized_name": "next quarter actions",
+    "entity_type": "ORG",
+    "mentions": "Next-Quarter Actions|the quarter",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_e93ecf27614e",
+    "name": "18 cast-iron casings",
+    "normalized_name": "18 cast iron casings",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "18 cast-iron casings|cast-iron casings|cast iron|cast-iron casing",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_51d7c56de677",
+    "name": "pressure-gauge drift",
+    "normalized_name": "pressure gauge drift",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "pressure-gauge drift",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_deee5b5bcfd8",
+    "name": "document processing",
+    "normalized_name": "document processing",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "document processing",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_62fbc677f06f",
+    "name": "Orion Manufacturing Ltd",
+    "normalized_name": "orion manufacturing",
+    "entity_type": "ORG",
+    "mentions": "Orion Manufacturing Ltd",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_60e26f3177de",
+    "name": "The beneficiary account",
+    "normalized_name": "beneficiary account",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "The beneficiary account",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_a4ddfbf031c6",
+    "name": "Transaction ID\nDate",
+    "normalized_name": "transaction id date",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "Transaction ID\nDate|DATE",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_66da4d757a7d",
+    "name": "Finished assemblies",
+    "normalized_name": "finished assemblies",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "Finished assemblies",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_c439f392b2bc",
+    "name": "incoming inspection",
+    "normalized_name": "incoming inspection",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "incoming inspection",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_6bbcdd8f9e53",
+    "name": "sealed bearing unit",
+    "normalized_name": "sealed bearing unit",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "sealed bearing unit",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_3bd0533bfb4f",
+    "name": "Bluewater Treatment Services",
+    "normalized_name": "bluewater treatment",
+    "entity_type": "ORG",
+    "mentions": "Bluewater Treatment Services",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_3fb9fa670a41",
+    "name": "the returned components",
+    "normalized_name": "returned components",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "the returned components",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_06f35bc37a62",
+    "name": "The next review meeting",
+    "normalized_name": "next review meeting",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "The next review meeting|review|Review",
+    "documents": "manufacturing_operations_report.pdf|fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_7c1a6cf6d313",
+    "name": "NCR-26-041 concerns",
+    "normalized_name": "ncr 26 041 concerns",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "NCR-26-041 concerns",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_7bc948a4ddb7",
+    "name": "2025–2026\nDocument",
+    "normalized_name": "2025 2026 document",
+    "entity_type": "PRODUCT",
+    "mentions": "2025–2026\nDocument",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_71e6f66e6945",
+    "name": "entity recognition",
+    "normalized_name": "entity recognition",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "entity recognition",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_7271a7a4b785",
+    "name": "reference TXN90001",
+    "normalized_name": "reference txn90001",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "reference TXN90001|reference TXN90002|reference TXN90003",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_f5864fd00e38",
+    "name": "loan\ndocumentation",
+    "normalized_name": "loan documentation",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "loan\ndocumentation",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_1748b4080131",
+    "name": "eligible\nemployees",
+    "normalized_name": "eligible employees",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "eligible\nemployees|employees",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_5d43d165353e",
+    "name": "Approval decisions",
+    "normalized_name": "approval decisions",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "Approval decisions",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_c6624ded0119",
+    "name": "ACCOUNT_BELONGS_TO",
+    "normalized_name": "account belongs to",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "ACCOUNT_BELONGS_TO",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_721c88faae9c",
+    "name": "machining downtime",
+    "normalized_name": "machining downtime",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "machining downtime",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_babd3bd378f8",
+    "name": "SealPro Industries",
+    "normalized_name": "sealpro industries",
+    "entity_type": "ORG",
+    "mentions": "SealPro Industries",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_8828d756e769",
+    "name": "Accepted\nmaterials",
+    "normalized_name": "accepted materials",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "Accepted\nmaterials|Materials|materials",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_77e7c9235a01",
+    "name": "its spindle sensor",
+    "normalized_name": "its spindle sensor",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "its spindle sensor",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_57273901109d",
+    "name": "Corrective Actions",
+    "normalized_name": "corrective actions",
+    "entity_type": "ORG",
+    "mentions": "Corrective Actions|corrective actions",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_1bc16e73b95a",
+    "name": "abnormal vibration",
+    "normalized_name": "abnormal vibration",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "abnormal vibration",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_2d821007c450",
+    "name": "calibration\nreview",
+    "normalized_name": "calibration review",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "calibration\nreview",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_13df38041ef3",
+    "name": "Vikram Iyer\nBR003",
+    "normalized_name": "vikram iyer br003",
+    "entity_type": "PERSON",
+    "mentions": "Vikram Iyer\nBR003|Vikram Iyer|BR003",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_74a45fd94e6e",
+    "name": "Customer Profiles",
+    "normalized_name": "customer profiles",
+    "entity_type": "ORG",
+    "mentions": "Customer Profiles",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_bf4efdd694f3",
+    "name": "GreenLeaf Traders",
+    "normalized_name": "greenleaf traders",
+    "entity_type": "ORG",
+    "mentions": "GreenLeaf Traders",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_62be52e07709",
+    "name": "a software engineer",
+    "normalized_name": "software engineer",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "a software engineer",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_ca480f4ca507",
+    "name": "Home Loan LN30003",
+    "normalized_name": "home loan ln30003",
+    "entity_type": "ORG",
+    "mentions": "Home Loan LN30003",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_019859b4a8ba",
+    "name": "No final approval",
+    "normalized_name": "no final approval",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "No final approval",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_d0d240e2d5ff",
+    "name": "To / Purpose\nAmount",
+    "normalized_name": "to purpose amount",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "To / Purpose\nAmount|Purpose",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_44e2468bcc0d",
+    "name": "A loan application",
+    "normalized_name": "loan applications",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "loan applications|Loan applications|A loan application|The application|the application",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_223ecdffa903",
+    "name": "a business customer",
+    "normalized_name": "business customer",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "a business customer",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_f4fd23df421d",
+    "name": "account ownership",
+    "normalized_name": "account ownership",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "account ownership",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_d73b2abb47c1",
+    "name": "branch assignment",
+    "normalized_name": "branch assignment",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "branch assignment",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_18d70c69659d",
+    "name": "The extraction system",
+    "normalized_name": "extraction system",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "The extraction system",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_3191b67e1a8b",
+    "name": "entity extraction",
+    "normalized_name": "entity extraction",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "entity extraction",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_28a2b971559d",
+    "name": "18,420 assemblies",
+    "normalized_name": "18 420 assemblies",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "18,420 assemblies",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_339c56278376",
+    "name": "supplier delivery",
+    "normalized_name": "supplier delivery",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "supplier delivery|delivery",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_54a55ca39106",
+    "name": "Apex Metals\nSteel",
+    "normalized_name": "apex metals steel",
+    "entity_type": "ORG",
+    "mentions": "Apex Metals\nSteel|Apex Metals",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_5ac54b58973c",
+    "name": "Finished products",
+    "normalized_name": "finished products",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "Finished products",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_ca86aa52c853",
+    "name": "a calibration\ncheck",
+    "normalized_name": "calibration check",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "a calibration\ncheck",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_47a961892573",
+    "name": "software testing",
+    "normalized_name": "software testing",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "software testing",
+    "documents": "fictional_bank_annual_operations_report.pdf|manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_30a9e997ab0c",
+    "name": "document linking",
+    "normalized_name": "document linking",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "document linking",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_fda835569f20",
+    "name": "another customer",
+    "normalized_name": "another customer",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "another customer",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_561c08878a18",
+    "name": "internet banking",
+    "normalized_name": "internet banking",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "internet banking",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_1b4ea2df2aa3",
+    "name": "Arjun Verma\nHome",
+    "normalized_name": "arjun verma home",
+    "entity_type": "PERSON",
+    "mentions": "Arjun Verma\nHome|Arjun Verma",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_3983998d61b5",
+    "name": "a repayment period",
+    "normalized_name": "repayment period",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "a repayment period",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_e7b7f336f9f3",
+    "name": "the reporting period",
+    "normalized_name": "reporting period",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "the reporting period",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_c98699b5f881",
+    "name": "RECEIVED_PAYMENT",
+    "normalized_name": "received payment",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "RECEIVED_PAYMENT|The payment",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_09b40c731cfc",
+    "name": "testing guidance",
+    "normalized_name": "testing guidance",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "testing guidance",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_d15df1546c1d",
+    "name": "Meridian Foundry",
+    "normalized_name": "meridian foundry",
+    "entity_type": "ORG",
+    "mentions": "Meridian Foundry",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_467202a012a0",
+    "name": "pressure testing",
+    "normalized_name": "pressure testing",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "pressure testing",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_ae04ee56068b",
+    "name": "mechanical seals",
+    "normalized_name": "mechanical seals",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "mechanical seals|seals",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_86f17f32e03e",
+    "name": "supplier\nquality",
+    "normalized_name": "supplier quality",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "supplier\nquality",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_53367b4d037c",
+    "name": "Customer Service",
+    "normalized_name": "customer service",
+    "entity_type": "ORG",
+    "mentions": "Customer Service|service",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_80599e68da0c",
+    "name": "the rejected casings",
+    "normalized_name": "rejected casings",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "the rejected casings",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_c95f3da349e5",
+    "name": "incoming testing",
+    "normalized_name": "incoming testing",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "incoming testing",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_3ab4a0e8400a",
+    "name": "first-pass yield",
+    "normalized_name": "first pass yield",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "first-pass yield",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_d01fe1edd310",
+    "name": "digital payment services",
+    "normalized_name": "digital payment",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "digital payment services",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_1d9486818201",
+    "name": "a retail customer",
+    "normalized_name": "retail customer",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "a retail customer",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_7c3e3f3f2134",
+    "name": "local retailers",
+    "normalized_name": "local retailers",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "local retailers",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_6c5534e9aee5",
+    "name": "a project manager",
+    "normalized_name": "project manager",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "a project manager",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_b720ae7ed0ed",
+    "name": "account opening",
+    "normalized_name": "account opening",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "account opening",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_b60841cc6386",
+    "name": "Production Flow",
+    "normalized_name": "production flow",
+    "entity_type": "ORG",
+    "mentions": "Production Flow|Production",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_a4ea5eefa53e",
+    "name": "RG-ASSY-02\nPump",
+    "normalized_name": "rg assy 02 pump",
+    "entity_type": "ORG",
+    "mentions": "RG-ASSY-02\nPump",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_2523afdf069d",
+    "name": "Volterra Drives",
+    "normalized_name": "volterra drives",
+    "entity_type": "PRODUCT",
+    "mentions": "Volterra Drives",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_6fa6a6a2475f",
+    "name": "electric motors",
+    "normalized_name": "electric motors",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "electric motors|motors|the motors",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_ca4f80fac879",
+    "name": "Volterra Drives",
+    "normalized_name": "volterra drives",
+    "entity_type": "PERSON",
+    "mentions": "Volterra Drives",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_12e2a3c5abfb",
+    "name": "Ananya Krishnan",
+    "normalized_name": "ananya krishnan",
+    "entity_type": "PERSON",
+    "mentions": "Ananya Krishnan",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_2fa12df94546",
+    "name": "Volterra Drives",
+    "normalized_name": "volterra drives",
+    "entity_type": "FAC",
+    "mentions": "Volterra Drives",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_e079c0d7d355",
+    "name": "Financial Year",
+    "normalized_name": "financial year",
+    "entity_type": "EVENT",
+    "mentions": "Financial Year",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_e93c031455e4",
+    "name": "retail banking",
+    "normalized_name": "retail banking",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "retail banking",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_350cf3bee860",
+    "name": "personal loans",
+    "normalized_name": "personal loans",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "personal loans|loans",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_7dc2ccd9550e",
+    "name": "three branches",
+    "normalized_name": "three branches",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "three branches|its branches",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_2db18894884d",
+    "name": "mobile banking services",
+    "normalized_name": "mobile banking",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "mobile banking services",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_8a9f33e942f0",
+    "name": "salary account services",
+    "normalized_name": "salary account",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "salary account services",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_f407647b9f84",
+    "name": "PDF\nprocessing",
+    "normalized_name": "pdf processing",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "PDF\nprocessing",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_3d2881078f8c",
+    "name": "the two facilities",
+    "normalized_name": "two facilities",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "the two facilities",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_19547cac484d",
+    "name": "Lakeside Plant",
+    "normalized_name": "lakeside plant",
+    "entity_type": "LOC",
+    "mentions": "Lakeside Plant",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_47d67a9d934d",
+    "name": "Joseph D'Souza",
+    "normalized_name": "joseph d souza",
+    "entity_type": "PERSON",
+    "mentions": "Joseph D'Souza",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_93d307eea24e",
+    "name": "motor housings",
+    "normalized_name": "motor housings",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "motor housings",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_1ca302c42e70",
+    "name": "No major issue",
+    "normalized_name": "no major issue",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "No major issue|the issue",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_ccd1d5cdcc95",
+    "name": "Lakeside Plant",
+    "normalized_name": "lakeside plant",
+    "entity_type": "FAC",
+    "mentions": "Lakeside Plant",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_c985a4989709",
+    "name": "Both employees",
+    "normalized_name": "both employees",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "Both employees",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_e0a6477b3979",
+    "name": "Its objectives",
+    "normalized_name": "its objectives",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "Its objectives",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_14cde0597461",
+    "name": "a supplied batch",
+    "normalized_name": "supplied batch",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "a supplied batch|the batch",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_09cb12241731",
+    "name": "this document",
+    "normalized_name": "this document",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "this document|This document",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_4f41c29ea6c7",
+    "name": "BR001\nCUST002",
+    "normalized_name": "br001 cust002",
+    "entity_type": "ORG",
+    "mentions": "BR001\nCUST002|BR001",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_e450bbf878f0",
+    "name": "an approved loan",
+    "normalized_name": "approved loan",
+    "entity_type": "ORG",
+    "mentions": "APPROVED_LOAN|an approved loan",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_aa5033704b89",
+    "name": "its expansion",
+    "normalized_name": "its expansion",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "its expansion",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_bf41f14d60b4",
+    "name": "organizations",
+    "normalized_name": "organizations",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "organizations",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_c56cf7ae27a3",
+    "name": "Plant Manager",
+    "normalized_name": "plant manager",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "Plant Manager",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_bbd872e257e1",
+    "name": "Model NP-200A",
+    "normalized_name": "model np 200a",
+    "entity_type": "PRODUCT",
+    "mentions": "Model NP-200A|3 NP-200A",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_2f60b3629e3c",
+    "name": "Omar Siddiqui",
+    "normalized_name": "omar siddiqui",
+    "entity_type": "PERSON",
+    "mentions": "Omar Siddiqui",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_8f4cda6cb289",
+    "name": "Investigation",
+    "normalized_name": "investigation",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "Investigation",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_75c161ff475b",
+    "name": "specification",
+    "normalized_name": "specification",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "specification",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_1683574ac546",
+    "name": "a hand abrasion",
+    "normalized_name": "hand abrasion",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "a hand abrasion",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_a65d41d7cba5",
+    "name": "NP-200A pumps",
+    "normalized_name": "np 200a pumps",
+    "entity_type": "ORG",
+    "mentions": "NP-200A pumps|NP-200A",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_2f0430011a30",
+    "name": "Ananya Mehta",
+    "normalized_name": "ananya mehta",
+    "entity_type": "PERSON",
+    "mentions": "Ananya Mehta",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_c5b502ce2271",
+    "name": "this account",
+    "normalized_name": "this account",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "this account",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_7d5046a2904b",
+    "name": "the loan account",
+    "normalized_name": "loan account",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "the loan account",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_597cf2d73e34",
+    "name": "its internal\nsystems",
+    "normalized_name": "its internal",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "its internal\nsystems",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_0d523e75decb",
+    "name": "two accounts",
+    "normalized_name": "two accounts",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "two accounts|accounts",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_724c94967258",
+    "name": "a bank account",
+    "normalized_name": "bank account",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "a bank account",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_cfa2829032a9",
+    "name": "a manufacturer",
+    "normalized_name": "manufacturer",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "a manufacturer",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_b75c85cf6f9d",
+    "name": "19,000 units",
+    "normalized_name": "19 000 units",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "19,000 units|10%",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_d0f6c38c7f10",
+    "name": "Nisha Thomas",
+    "normalized_name": "nisha thomas",
+    "entity_type": "PERSON",
+    "mentions": "Nisha Thomas",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_fae641b89f96",
+    "name": "89%\n12 motors",
+    "normalized_name": "89 12 motors",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "89%\n12 motors",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_3c36e4d2b118",
+    "name": "Suresh Balan",
+    "normalized_name": "suresh balan",
+    "entity_type": "PERSON",
+    "mentions": "Suresh Balan",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_9d671bb206b1",
+    "name": "Maharashtra",
+    "normalized_name": "maharashtra",
+    "entity_type": "ORG",
+    "mentions": "Maharashtra",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_cfdb94baab48",
+    "name": "10 November",
+    "normalized_name": "10 november",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "10 November",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_80926c0d3ec9",
+    "name": "coordinates",
+    "normalized_name": "coordinates",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "coordinates",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_a966f8270dec",
+    "name": "SERVICED_BY",
+    "normalized_name": "serviced by",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "SERVICED_BY",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_4eaa8b8a2778",
+    "name": "Q2\nSupplier",
+    "normalized_name": "q2 supplier",
+    "entity_type": "ORG",
+    "mentions": "Q2\nSupplier|Q2",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_04a3296a00d5",
+    "name": "Both models",
+    "normalized_name": "both models",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "Both models",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_d0c0dd9837c8",
+    "name": "92%\nPorosity",
+    "normalized_name": "92 porosity",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "92%\nPorosity|porosity",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_82b6aaa18d48",
+    "name": "18 castings",
+    "normalized_name": "18 castings",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "18 castings",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_6a7d64417c00",
+    "name": "All content",
+    "normalized_name": "all content",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "All content",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_469147e1cb88",
+    "name": "Neha Rao\n2",
+    "normalized_name": "neha rao 2",
+    "entity_type": "PERSON",
+    "mentions": "Neha Rao\n2|Neha Rao",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_9aea111d276a",
+    "name": "home loans",
+    "normalized_name": "home loans",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "home loans",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_54a2a0ca85f2",
+    "name": "12 January",
+    "normalized_name": "12 january",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "12 January",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_547c4afc254e",
+    "name": "a debit card",
+    "normalized_name": "debit card",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "a debit card",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_208a20e24324",
+    "name": "5 February",
+    "normalized_name": "5 february",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "5 February",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_9a0e14fcdf80",
+    "name": "LOCATED_AT",
+    "normalized_name": "located at",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "LOCATED_AT",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_3c15fc7003fa",
+    "name": "Coimbatore",
+    "normalized_name": "coimbatore",
+    "entity_type": "GPE",
+    "mentions": "Coimbatore",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_ea0fb577ec2e",
+    "name": "Meera Iyer",
+    "normalized_name": "meera iyer",
+    "entity_type": "PERSON",
+    "mentions": "Meera Iyer",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_6348578a19dc",
+    "name": "Arun Menon",
+    "normalized_name": "arun menon",
+    "entity_type": "PERSON",
+    "mentions": "Arun Menon|Arun\nMenon",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_227378f3319b",
+    "name": "Kavita Rao",
+    "normalized_name": "kavita rao",
+    "entity_type": "PERSON",
+    "mentions": "Kavita Rao",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_591b6c562f0b",
+    "name": "Tamil Nadu",
+    "normalized_name": "tamil nadu",
+    "entity_type": "ORG",
+    "mentions": "Tamil Nadu",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_4aba2adcaf81",
+    "name": "Farah Khan",
+    "normalized_name": "farah khan",
+    "entity_type": "PERSON",
+    "mentions": "Farah Khan",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_65a8b44a943f",
+    "name": "two plants",
+    "normalized_name": "two plants",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "two plants",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_e8ab2ca12231",
+    "name": "200 litres",
+    "normalized_name": "200 litres",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "200 litres",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_aef7f48490c2",
+    "name": "East Basin",
+    "normalized_name": "east basin",
+    "entity_type": "LOC",
+    "mentions": "East Basin",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_bb2c0dc72807",
+    "name": "LS-TEST-03",
+    "normalized_name": "ls test 03",
+    "entity_type": "ORG",
+    "mentions": "LS-TEST-03",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_e6b348e88622",
+    "name": "assessment",
+    "normalized_name": "assessment",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "assessment",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_b421d8649b8e",
+    "name": "Branch ID",
+    "normalized_name": "branch id",
+    "entity_type": "ORG",
+    "mentions": "Branch ID",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_6b9e5445706b",
+    "name": "Bengaluru",
+    "normalized_name": "bengaluru",
+    "entity_type": "GPE",
+    "mentions": "Bengaluru",
+    "documents": "fictional_bank_annual_operations_report.pdf|manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_bd292151eb88",
+    "name": "suppliers",
+    "normalized_name": "suppliers",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "suppliers|Suppliers",
+    "documents": "fictional_bank_annual_operations_report.pdf|manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_0ad4182c5879",
+    "name": "48 months",
+    "normalized_name": "48 months",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "48 months",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_4434538325e0",
+    "name": "312 hours",
+    "normalized_name": "312 hours",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "312 hours",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_a64790f0da9a",
+    "name": "280 hours",
+    "normalized_name": "280 hours",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "280 hours",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_312ef030059f",
+    "name": "Dev Patel",
+    "normalized_name": "dev patel",
+    "entity_type": "PERSON",
+    "mentions": "Dev Patel",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_77f384f53b86",
+    "name": "RG-CNC-04",
+    "normalized_name": "rg cnc 04",
+    "entity_type": "ORG",
+    "mentions": "RG-CNC-04",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_4f5525723dfb",
+    "name": "Rohan Das",
+    "normalized_name": "rohan das",
+    "entity_type": "PERSON",
+    "mentions": "Rohan Das",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_ac45a09d33fe",
+    "name": "impellers",
+    "normalized_name": "impellers",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "impellers",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_2bc79b3ffde7",
+    "name": "fasteners",
+    "normalized_name": "fasteners",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "fasteners",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_37ed6cea6124",
+    "name": "Each pump",
+    "normalized_name": "each pump",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "Each pump",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_365d6cdf7a13",
+    "name": "packaging",
+    "normalized_name": "packaging",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "packaging",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_d29f9b47a77f",
+    "name": "September",
+    "normalized_name": "september",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "September",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_bf9e09f77310",
+    "name": "equipment",
+    "normalized_name": "equipment",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "equipment",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_d5678aed773a",
+    "name": "incidents",
+    "normalized_name": "incidents",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "incidents",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_6c7b8f869f9f",
+    "name": "Data note",
+    "normalized_name": "data note",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "Data note",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_32d412f6130a",
+    "name": "payments",
+    "normalized_name": "payments",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "payments",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_fab29a8f542b",
+    "name": "15 March",
+    "normalized_name": "15 march",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "15 March|March",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_d6a7c700863b",
+    "name": "20 March",
+    "normalized_name": "20 march",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "20 March",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_780c84aa68c8",
+    "name": "Page 4\n6",
+    "normalized_name": "page 4 6",
+    "entity_type": "LAW",
+    "mentions": "Page 4\n6",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_4de991d5427b",
+    "name": "LOCATION",
+    "normalized_name": "location",
+    "entity_type": "ORG",
+    "mentions": "LOCATION",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_e2759fa298c3",
+    "name": "entities",
+    "normalized_name": "entities",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "entities",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_f4e673460c21",
+    "name": "41 units",
+    "normalized_name": "41 units",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "41 units",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_e2c121ae0cb4",
+    "name": "35 units",
+    "normalized_name": "35 units",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "35 units",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_c2c331be116c",
+    "name": "the facility",
+    "normalized_name": "facility",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "the facility",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_8680818b6f5e",
+    "name": "76 hours",
+    "normalized_name": "76 hours",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "76 hours",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_952d48761f52",
+    "name": "Page 3\n3",
+    "normalized_name": "page 3 3",
+    "entity_type": "LAW",
+    "mentions": "Page 3\n3",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_2548a743659b",
+    "name": "Appendix",
+    "normalized_name": "appendix",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "Appendix",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_0196ce77ce84",
+    "name": "examples",
+    "normalized_name": "examples",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "examples",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_683db022ec89",
+    "name": "amounts",
+    "normalized_name": "amounts",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "amounts",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_7e7e260b8dc0",
+    "name": "Chennai",
+    "normalized_name": "chennai",
+    "entity_type": "GPE",
+    "mentions": "Chennai",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_56ba3cef2c0f",
+    "name": "CUST003",
+    "normalized_name": "cust003",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "CUST003",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_45c3feba10a4",
+    "name": "18 June",
+    "normalized_name": "18 june",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "18 June|15 June|11 June",
+    "documents": "fictional_bank_annual_operations_report.pdf|manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_90bcb4cd7bfe",
+    "name": "3 March",
+    "normalized_name": "3 march",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "3 March|8 March|8\nMarch",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_af77696d5af8",
+    "name": "EMPLOYS",
+    "normalized_name": "employs",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "EMPLOYS",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_349c1372777d",
+    "name": "Measure",
+    "normalized_name": "measure",
+    "entity_type": "WORK_OF_ART",
+    "mentions": "Measure",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_73688b950db1",
+    "name": "figures",
+    "normalized_name": "figures",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "figures",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_677f94c87c44",
+    "name": "kitting",
+    "normalized_name": "kitting",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "kitting",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_10ea3cd082f4",
+    "name": "the machine",
+    "normalized_name": "machine",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "the machine",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_41251b7fe149",
+    "name": "CS-8831",
+    "normalized_name": "cs 8831",
+    "entity_type": "ORG",
+    "mentions": "CS-8831",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_076358fb00cf",
+    "name": "leakage",
+    "normalized_name": "leakage",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "leakage",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_ffaf17671c2c",
+    "name": "9\nApril",
+    "normalized_name": "9 april",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "9\nApril",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_c8a06e78e104",
+    "name": "events",
+    "normalized_name": "events",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "events",
+    "documents": "fictional_bank_annual_operations_report.pdf|manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_106539649c06",
+    "name": "Page 2",
+    "normalized_name": "page 2",
+    "entity_type": "LAW",
+    "mentions": "Page 2",
+    "documents": "fictional_bank_annual_operations_report.pdf|manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_d49901047f50",
+    "name": "Mumbai",
+    "normalized_name": "mumbai",
+    "entity_type": "GPE",
+    "mentions": "Mumbai",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_a766b05aeaee",
+    "name": "Active",
+    "normalized_name": "active",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "Active",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_b4e13cca1604",
+    "name": "PERSON",
+    "normalized_name": "person",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "PERSON",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_569aae1771ee",
+    "name": "Target",
+    "normalized_name": "target",
+    "entity_type": "ORG",
+    "mentions": "Target",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_8e11324a379d",
+    "name": "19 May",
+    "normalized_name": "19 may",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "19 May",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_720cb7e4dbef",
+    "name": "minute",
+    "normalized_name": "minute",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "minute",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_316aa2624ba9",
+    "name": "23 May",
+    "normalized_name": "23 may",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "23 May",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_d11f06611ab8",
+    "name": "8 July",
+    "normalized_name": "8 july",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "8 July",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_ca00f5b3f1dd",
+    "name": "people",
+    "normalized_name": "people",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "people",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_81267ef05569",
+    "name": "BR002",
+    "normalized_name": "br002",
+    "entity_type": "ORG",
+    "mentions": "BR002",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_00a0d277f5d9",
+    "name": "funds",
+    "normalized_name": "funds",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "funds",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_e3cc49867b37",
+    "name": "Hosur",
+    "normalized_name": "hosur",
+    "entity_type": "GPE",
+    "mentions": "Hosur",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_3123e78f6da8",
+    "name": "Hosur",
+    "normalized_name": "hosur",
+    "entity_type": "ORG",
+    "mentions": "Hosur",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_ad1b6bba3cb5",
+    "name": "dates",
+    "normalized_name": "dates",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "dates",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_cca0920ff6e6",
+    "name": "OWNS",
+    "normalized_name": "owns",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "OWNS",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_9896a620ac92",
+    "name": "a plan",
+    "normalized_name": "plan",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "a plan",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_833b192ae9f0",
+    "name": "94.2%",
+    "normalized_name": "94 2",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "94.2%",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_66ac24978754",
+    "name": "hold",
+    "normalized_name": "hold",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "hold",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_3ff7a8ddc8d7",
+    "name": "work",
+    "normalized_name": "work",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "work",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_b4d8af784c54",
+    "name": "NSB",
+    "normalized_name": "nsb",
+    "entity_type": "ORG",
+    "mentions": "NSB",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_047e284f85f1",
+    "name": "EMI",
+    "normalized_name": "emi",
+    "entity_type": "ORG",
+    "mentions": "EMI",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_dc17bf8012b2",
+    "name": "INR",
+    "normalized_name": "inr",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "INR",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_dfb58f7cd81c",
+    "name": "the end",
+    "normalized_name": "end",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "the end|END|the\nend",
+    "documents": "fictional_bank_annual_operations_report.pdf|manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_5cbad075169d",
+    "name": "The company",
+    "normalized_name": "",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "The company|Company|the company",
+    "documents": "fictional_bank_annual_operations_report.pdf|manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_17d8a2e26794",
+    "name": "the fictional",
+    "normalized_name": "fictional",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "the fictional",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_118dd244d440",
+    "name": "All",
+    "normalized_name": "all",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "All",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_256d88f20a2a",
+    "name": "They",
+    "normalized_name": "they",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "They",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_3317293ca499",
+    "name": "real",
+    "normalized_name": "real",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "real",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_204a73894aa7",
+    "name": "retail",
+    "normalized_name": "retail",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "retail",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_4cef380468d4",
+    "name": "Mumbai,\nMaharashtra",
+    "normalized_name": "mumbai maharashtra",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "Mumbai,\nMaharashtra",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_6078545eb5a7",
+    "name": "three",
+    "normalized_name": "three",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "three",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_7c50596957fb",
+    "name": "He",
+    "normalized_name": "he",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "He",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_7a6cdaa62a86",
+    "name": "12 January 2022",
+    "normalized_name": "12 january 2022",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "12 January 2022",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_dd90904fb166",
+    "name": "She",
+    "normalized_name": "she",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "She",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_ecd411b23717",
+    "name": "Account Current",
+    "normalized_name": "account current",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "Account Current",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_7ad2d175a8e6",
+    "name": "a small",
+    "normalized_name": "small",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "a small",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_dbc3ff05b0f1",
+    "name": "which",
+    "normalized_name": "which",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "which",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_aebaa888023f",
+    "name": "food\nproducts",
+    "normalized_name": "food products",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "food\nproducts",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_f535a8e4c065",
+    "name": "Name Occupation",
+    "normalized_name": "name occupation",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "Name Occupation",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_9e8a9903461d",
+    "name": "Account Information\nSavings Account SA10001",
+    "normalized_name": "account information savings account sa10001",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "Account Information\nSavings Account SA10001",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_2ac3edfd38da",
+    "name": "internet banking and mobile banking services",
+    "normalized_name": "internet banking and mobile banking",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "internet banking and mobile banking services",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_90539797d48e",
+    "name": "a debit",
+    "normalized_name": "debit",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "a debit",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_bb788e165d9f",
+    "name": "ID Account",
+    "normalized_name": "id account",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "ID Account",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_00e6dc2338b1",
+    "name": "Loan Information\nNorthStar Bank",
+    "normalized_name": "loan information northstar bank",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "Loan Information\nNorthStar Bank",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_6180417f7300",
+    "name": "Personal Loan LN30001 for Rahul Sharma",
+    "normalized_name": "personal loan ln30001 for rahul sharma",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "Personal Loan LN30001 for Rahul Sharma",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_6624ec8d6f0d",
+    "name": "18 June 2024",
+    "normalized_name": "18 june 2024",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "18 June 2024",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_3ee57aa46870",
+    "name": "The sanctioned loan\namount (LN30001)",
+    "normalized_name": "sanctioned loan amount ln30001",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "The sanctioned loan\namount (LN30001)",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_9536ee490d65",
+    "name": "INR 500,000",
+    "normalized_name": "inr 500 000",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "INR 500,000",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_fa67eb944420",
+    "name": "a repayment period of 48 months",
+    "normalized_name": "repayment period of 48 months",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "a repayment period of 48 months",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_922ead8cf154",
+    "name": "Business Loan LN30002 for Priya Singh",
+    "normalized_name": "business loan ln30002 for priya singh",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "Business Loan LN30002 for Priya Singh",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_82907f6c6b6b",
+    "name": "5 February 2025",
+    "normalized_name": "5 february 2025",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "5 February 2025",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_54a1f069f4ad",
+    "name": "The sanctioned amount (LN30002)",
+    "normalized_name": "sanctioned amount ln30002",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "The sanctioned amount (LN30002)",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_b81c826eea72",
+    "name": "INR 1,200,000",
+    "normalized_name": "inr 1 200 000",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "INR 1,200,000",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_4c2cf722c764",
+    "name": "10 November 2025",
+    "normalized_name": "10 november 2025",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "10 November 2025",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_0eda9e1013a9",
+    "name": "this fictional report",
+    "normalized_name": "this fictional report",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "this fictional report",
+    "documents": "fictional_bank_annual_operations_report.pdf|manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_3afffeb1dffd",
+    "name": "Selected Transaction",
+    "normalized_name": "selected transaction",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "Selected Transaction",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_bc1ef155167c",
+    "name": "INR 25,000",
+    "normalized_name": "inr 25 000",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "INR 25,000",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_965562d97ae8",
+    "name": "INR 75,000",
+    "normalized_name": "inr 75 000",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "INR 75,000",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_eac50be9b4cf",
+    "name": "8 March 2026",
+    "normalized_name": "8 march 2026",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "8 March 2026",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_43a6232ff18f",
+    "name": "an EMI payment of INR 12,500",
+    "normalized_name": "emi payment of inr 12 500",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "an EMI payment of INR 12,500",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_5a32309e1dbd",
+    "name": "15 March 2026",
+    "normalized_name": "15 march 2026",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "15 March 2026",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_fc9e52cb3c83",
+    "name": "Rahul Sharma's Savings\nAccount",
+    "normalized_name": "rahul sharma savings account",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "Rahul Sharma's Savings\nAccount",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_708aced24c9a",
+    "name": "INR 10,000",
+    "normalized_name": "inr 10 000",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "INR 10,000",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_9a0a4b1ce710",
+    "name": "20 March 2026",
+    "normalized_name": "20 march 2026",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "20 March 2026",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_8ef3ccf091c9",
+    "name": "Employee and Branch Responsibilities\nAnanya Mehta",
+    "normalized_name": "employee and branch responsibilities ananya mehta",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "Employee and Branch Responsibilities\nAnanya Mehta",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_c7d8d36fb390",
+    "name": "the Mumbai Central Branch of NorthStar Bank",
+    "normalized_name": "mumbai central branch of northstar bank",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "the Mumbai Central Branch of NorthStar Bank",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_3767a30979dc",
+    "name": "retail account operations\nand coordinates",
+    "normalized_name": "retail account operations and coordinates",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "retail account operations\nand coordinates",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_04a70d4f4576",
+    "name": "bank credit",
+    "normalized_name": "bank credit",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "bank credit",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_d1358f3016fb",
+    "name": "banking",
+    "normalized_name": "banking",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "banking",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_7ec285bea942",
+    "name": "banking digital",
+    "normalized_name": "banking digital",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "banking digital",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_a0b3a126330e",
+    "name": "loan applications submitted to NorthStar Bank",
+    "normalized_name": "loan applications submitted to northstar bank",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "loan applications submitted to NorthStar Bank",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_f4a688e45a3f",
+    "name": "Relationships Meridian Technologies Pvt",
+    "normalized_name": "relationships meridian technologies",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "Relationships Meridian Technologies Pvt",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_a623b01f91df",
+    "name": "a corporate salary",
+    "normalized_name": "corporate salary",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "a corporate salary",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_de6572b7b3b0",
+    "name": "its Mumbai Central Branch",
+    "normalized_name": "its mumbai central branch",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "its Mumbai Central Branch",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_ba64004ca439",
+    "name": "its Current Account CA20001 with NorthStar Bank",
+    "normalized_name": "its current account ca20001 with northstar bank",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "its Current Account CA20001 with NorthStar Bank",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_58d548a02814",
+    "name": "a Business Loan from the bank",
+    "normalized_name": "business loan from the bank",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "a Business Loan from the bank",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_28f8e258ea74",
+    "name": "eligible\nemployees of Orion Manufacturing Ltd",
+    "normalized_name": "eligible employees of orion manufacturing",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "eligible\nemployees of Orion Manufacturing Ltd",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_7950d44b2a18",
+    "name": "its Bengaluru Technology Park Branch",
+    "normalized_name": "its bengaluru technology park branch",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "its Bengaluru Technology Park Branch",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_863a384a8850",
+    "name": "It",
+    "normalized_name": "it",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "It",
+    "documents": "fictional_bank_annual_operations_report.pdf|manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_0670a775da15",
+    "name": "Compliance and Operational Notes\nNorthStar Bank",
+    "normalized_name": "compliance and operational notes northstar bank",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "Compliance and Operational Notes\nNorthStar Bank",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_9617df1a6e49",
+    "name": "identification",
+    "normalized_name": "identification",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "identification",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_7c2b9645b269",
+    "name": "A loan application under review",
+    "normalized_name": "loan application under review",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "A loan application under review",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_647463142440",
+    "name": "two",
+    "normalized_name": "two",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "two",
+    "documents": "fictional_bank_annual_operations_report.pdf|manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_2d88d0873fb1",
+    "name": "Knowledge Testing",
+    "normalized_name": "knowledge testing",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "Knowledge Testing",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_0f51326d726b",
+    "name": "structured annotations\nin the document",
+    "normalized_name": "structured annotations in the document",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "structured annotations\nin the document",
+    "documents": "fictional_bank_annual_operations_report.pdf"
+  },
+  {
+    "id": "entity_584b6fa8623b",
+    "name": "a manufacturer of industrial pump assemblies",
+    "normalized_name": "manufacturer of industrial pump assemblies",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "a manufacturer of industrial pump assemblies",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_f69d7dceaf6a",
+    "name": "Executive Summary\nNorthstar Components Ltd",
+    "normalized_name": "executive summary northstar components",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "Executive Summary\nNorthstar Components Ltd",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_638ecb00872e",
+    "name": "treatment",
+    "normalized_name": "treatment",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "treatment",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_94707cec1821",
+    "name": "Q2\n2026",
+    "normalized_name": "q2 2026",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "Q2\n2026",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_74e7af3d7356",
+    "name": "a plan of 19,000 units",
+    "normalized_name": "plan of 19 000 units",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "a plan of 19,000 units",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_94cb885f4039",
+    "name": "Operations Director",
+    "normalized_name": "operations director",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "Operations Director",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_f24b0ee8eb0a",
+    "name": "Operations Director Meera Iyer",
+    "normalized_name": "operations director meera iyer",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "Operations Director Meera Iyer",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_59681dc60e3c",
+    "name": "Arun",
+    "normalized_name": "arun",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "Arun",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_518dcaab6687",
+    "name": "14 Meridian Industrial",
+    "normalized_name": "14 meridian industrial",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "14 Meridian Industrial",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_afa82bb47b84",
+    "name": "Director Dev Patel",
+    "normalized_name": "director dev patel",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "Director Dev Patel",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_b10f4080fd9e",
+    "name": "Rivergate Plant in Coimbatore",
+    "normalized_name": "rivergate plant in coimbatore",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "Rivergate Plant in Coimbatore",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_896a6a72dc56",
+    "name": "pump casing machining and assembly",
+    "normalized_name": "pump casing machining and assembly",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "pump casing machining and assembly",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_4e85497df8af",
+    "name": "Lakeside Plant in Hosur",
+    "normalized_name": "lakeside plant in hosur",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "Lakeside Plant in Hosur",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_a4883fbc0ca4",
+    "name": "motor housings, impellers",
+    "normalized_name": "motor housings impellers",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "motor housings, impellers",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_be10987c6fb9",
+    "name": "the Central Distribution Warehouse in Bengaluru",
+    "normalized_name": "central distribution warehouse in bengaluru",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "the Central Distribution Warehouse in Bengaluru",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_da9736ce9277",
+    "name": "incoming",
+    "normalized_name": "incoming",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "incoming",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_e680cb101b55",
+    "name": "machining or kitting",
+    "normalized_name": "machining or kitting",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "machining or kitting",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_6a37b52e77dc",
+    "name": "pressure",
+    "normalized_name": "pressure",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "pressure",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_11325b2b9d1f",
+    "name": "Rivergate Plant assembly centre",
+    "normalized_name": "rivergate plant assembly centre",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "Rivergate Plant assembly centre",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_86246bba74bf",
+    "name": "Quality",
+    "normalized_name": "quality",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "Quality",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_06896fe2ce54",
+    "name": "test Hydrostatic",
+    "normalized_name": "test hydrostatic",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "test Hydrostatic",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_9298f43533b9",
+    "name": "76 hours of unplanned downtime",
+    "normalized_name": "76 hours of unplanned downtime",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "76 hours of unplanned downtime",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_07ef6beaf87f",
+    "name": "May",
+    "normalized_name": "may",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "May",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_a9a25c3ee50a",
+    "name": "RG centre The",
+    "normalized_name": "rg centre the",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "RG centre The",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_41fac320b82c",
+    "name": "Maintenance Engineer",
+    "normalized_name": "maintenance engineer",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "Maintenance Engineer",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_e9582169cb8f",
+    "name": "Maintenance\nEngineer Farah Khan",
+    "normalized_name": "maintenance engineer farah khan",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "Maintenance\nEngineer Farah Khan",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_390930c40a16",
+    "name": "19 May 2026",
+    "normalized_name": "19 may 2026",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "19 May 2026",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_3d631cf33b1c",
+    "name": "Technician",
+    "normalized_name": "technician",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "Technician",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_760565e6814a",
+    "name": "Technician Joseph D'Souza",
+    "normalized_name": "technician joseph d souza",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "Technician Joseph D'Souza",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_66a7c73467af",
+    "name": "200 litres per minute",
+    "normalized_name": "200 litres per minute",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "200 litres per minute",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_b1a96861509e",
+    "name": "NP-200B",
+    "normalized_name": "np 200b",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "NP-200B",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_1ba472ef0035",
+    "name": "a steel",
+    "normalized_name": "steel",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "a steel",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_bbe8c24d4a19",
+    "name": "Procurement Manager",
+    "normalized_name": "procurement manager",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "Procurement Manager",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_7745a130add6",
+    "name": "Procurement Manager Rohan Das",
+    "normalized_name": "procurement manager rohan das",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "Procurement Manager Rohan Das",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_c5b54a55f1cb",
+    "name": "supplier\nquality and delivery",
+    "normalized_name": "supplier quality and delivery",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "supplier\nquality and delivery",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_f19d4c885d95",
+    "name": "Mechanical",
+    "normalized_name": "mechanical",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "Mechanical",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_cf269ceef7e1",
+    "name": "18 iron",
+    "normalized_name": "18 iron",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "18 iron",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_d2f96c0391ae",
+    "name": "Quality Manager",
+    "normalized_name": "quality manager",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "Quality Manager",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_9ba3897b65a6",
+    "name": "Quality Manager Leena Bose",
+    "normalized_name": "quality manager leena bose",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "Quality Manager Leena Bose",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_7fbca3ea61dc",
+    "name": "- non conformance 041",
+    "normalized_name": "non conformance 041",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "- non conformance 041",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_1499330f178b",
+    "name": "12 Volterra",
+    "normalized_name": "12 volterra",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "12 Volterra",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_b3ac58062e00",
+    "name": "2 June 2026",
+    "normalized_name": "2 june 2026",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "2 June 2026",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_57e2ae7e2f76",
+    "name": "Supplier Quality Engineer",
+    "normalized_name": "supplier quality engineer",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "Supplier Quality Engineer",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_fcd76a0bc571",
+    "name": "Supplier Quality Engineer Omar Siddiqui",
+    "normalized_name": "supplier quality engineer omar siddiqui",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "Supplier Quality Engineer Omar Siddiqui",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_56b83d7e0957",
+    "name": "an incorrectly seated\nrotor bearing",
+    "normalized_name": "incorrectly seated rotor bearing",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "an incorrectly seated\nrotor bearing",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_946584aad81f",
+    "name": "Customer Service Lead",
+    "normalized_name": "customer service lead",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "Customer Service Lead",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_da94a98c6d25",
+    "name": "Customer Service Lead Priya Nair",
+    "normalized_name": "customer service lead priya nair",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "Customer Service Lead Priya Nair",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_c1fe7699de2a",
+    "name": "case CS-8831",
+    "normalized_name": "case cs 8831",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "case CS-8831",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_b1f1c78b0239",
+    "name": "Supplier Motor",
+    "normalized_name": "supplier motor",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "Supplier Motor",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_15a27596bd2d",
+    "name": "CS-8831\nLeakage",
+    "normalized_name": "cs 8831 leakage",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "CS-8831\nLeakage",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_20e870f91686",
+    "name": "041 action Status",
+    "normalized_name": "041 action status",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "041 action Status",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_5e24b93a0b4e",
+    "name": "Priya Nair\nMonitoring\n4",
+    "normalized_name": "priya nair monitoring 4",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "Priya Nair\nMonitoring\n4",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_65046475a538",
+    "name": "Planner Suresh",
+    "normalized_name": "planner suresh",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "Planner Suresh",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_8674f504593e",
+    "name": "weekly preventive inspections for RG-CNC-04",
+    "normalized_name": "weekly preventive inspections for rg cnc 04",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "weekly preventive inspections for RG-CNC-04",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_8ebfeaa4e45c",
+    "name": "29 May 2026",
+    "normalized_name": "29 may 2026",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "29 May 2026",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_b04d09d4acff",
+    "name": "a daily verification",
+    "normalized_name": "daily verification",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "a daily verification",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_a8323e6f5aac",
+    "name": "Safety Officer",
+    "normalized_name": "safety officer",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "Safety Officer",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_68cd4b3bf6bc",
+    "name": "Safety Officer Ananya Krishnan",
+    "normalized_name": "safety officer ananya krishnan",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "Safety Officer Ananya Krishnan",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_a1d59dc58384",
+    "name": "a tagout",
+    "normalized_name": "tagout",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "a tagout",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_f9911f2c4e64",
+    "name": "18 June 2026",
+    "normalized_name": "18 june 2026",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "18 June 2026",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_93fd2369e7e3",
+    "name": "Improvement",
+    "normalized_name": "improvement",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "Improvement",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_2624fc2d4978",
+    "name": "the Improvement Operations",
+    "normalized_name": "improvement operations",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "the Improvement Operations",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_699263f74e9c",
+    "name": "a monitoring",
+    "normalized_name": "monitoring",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "a monitoring",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_8c135f50d5c5",
+    "name": "supplier process",
+    "normalized_name": "supplier process",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "supplier process",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_79e3f39d03a9",
+    "name": "the test final",
+    "normalized_name": "test final",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "the test final",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_e591e1f3986e",
+    "name": "8 July 2026",
+    "normalized_name": "8 july 2026",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "8 July 2026",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_eab045b05fb3",
+    "name": "-iron casings",
+    "normalized_name": "iron casings",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "-iron casings",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_b97c18b442d9",
+    "name": "NCR-26-041 concerns a supplied batch",
+    "normalized_name": "ncr 26 041 concerns a supplied batch",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "NCR-26-041 concerns a supplied batch",
+    "documents": "manufacturing_operations_report.pdf"
+  },
+  {
+    "id": "entity_980328e0d768",
+    "name": "leakage in NP-200A pumps",
+    "normalized_name": "leakage in np 200a pumps",
+    "entity_type": "NOUN_PHRASE",
+    "mentions": "leakage in NP-200A pumps",
+    "documents": "manufacturing_operations_report.pdf"
+  }
+]

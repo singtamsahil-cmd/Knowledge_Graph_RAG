@@ -74,8 +74,8 @@ def fetch_documents(cfg: dict) -> list[dict]:
 
 
 def delete_document_everywhere(cfg: dict, name: str) -> dict:
-    """Delete the PDF file (if present) and its Neo4j data. Returns a report."""
-    report: dict = {"file_deleted": False, "neo4j": None}
+    """Delete the PDF file (if present) and its Neo4j + Qdrant data."""
+    report: dict = {"file_deleted": False, "neo4j": None, "qdrant_deleted": 0}
     path = INPUT_DIR / name
     if path.exists() and path.is_file():
         path.unlink()
@@ -91,6 +91,15 @@ def delete_document_everywhere(cfg: dict, name: str) -> dict:
             report["neo4j"] = store.delete_document(name)
     finally:
         store.close()
+    qcfg = cfg.get("qdrant", {})
+    if str(qcfg.get("enabled", True)).lower() not in ("false", "0", "no"):
+        try:
+            import os as _os
+            from src import vector_store as _vs
+            qurl = qcfg.get("url") or _os.environ.get("QDRANT_URL", "http://localhost:6333")
+            report["qdrant_deleted"] = _vs.delete_document(name, url=qurl)
+        except Exception as exc:
+            log.warning("Qdrant delete skipped: %s", exc)
     return report
 
 
@@ -117,7 +126,7 @@ if not connected:
     st.error("Cannot reach Neo4j. Start it with `docker compose up -d neo4j` and refresh.")
     st.stop()
 
-tab_upload, tab_docs, tab_explore = st.tabs(["Upload", "Documents", "Explore"])
+tab_upload, tab_docs, tab_explore, tab_ask = st.tabs(["Upload", "Documents", "Explore", "Ask"])
 
 with tab_upload:
     st.subheader("Upload PDFs")
@@ -134,10 +143,16 @@ with tab_upload:
                 dest.write_bytes(u.getbuffer())
                 with st.spinner(f"Extracting {u.name} ..."):
                     try:
+                        # force=True: user explicitly asked to (re)process this file,
+                        # so the incremental manifest must not skip it.
                         result = run_pipeline(pdf=str(dest), cfg=cfg,
-                                              write_to_neo4j=True, export=False)
+                                              write_to_neo4j=True, export=False,
+                                              force=True)
                         st.success(f"{u.name}: {result['stats'].get('num_entities', 0)} "
                                    f"entities, {result['stats'].get('num_relations', 0)} relations stored.")
+                        if u.name in (result["stats"].get("needs_ocr") or []):
+                            st.warning(f"{u.name}: scanned text detected — "
+                                       "pre-process with OCRmyPDF/tesseract and re-ingest for full coverage.")
                     except Exception as exc:
                         log.exception("Pipeline failed for %s", u.name)
                         st.error(f"{u.name} failed: {exc}")
@@ -194,9 +209,11 @@ with tab_explore:
         finally:
             store.close()
         st.write(f"{len(rels)} relations from **{choice}**")
-        for r in rels[:200]:
-            with st.expander(f"{r['subject']} — {r['predicate']} — {r['object']}"):
-                st.caption(f"p. {r.get('page_number')}")
+        for r in sorted(rels[:500], key=lambda x: float(x.get("confidence", 0.5))):
+            conf = float(r.get("confidence", 0.5))
+            badge = "low" if conf < 0.6 else ("med" if conf < 0.8 else "high")
+            with st.expander(f"{r['subject']} — {r['predicate']} — {r['object']}  [{badge} {conf:.2f}]"):
+                st.caption(f"p. {r.get('page_number')} | confidence {conf:.2f}")
                 for s in (r.get("evidence") or []):
                     st.write(s)
         q = st.text_input("Search entities")
@@ -209,3 +226,64 @@ with tab_explore:
             finally:
                 store.close()
             st.dataframe(hits, use_container_width=True)
+
+with tab_ask:
+    st.subheader("Ask the graph (RAG)")
+    lcfg = cfg.get("llm", {}) or {}
+    prov_options = ["ollama-local", "ollama-cloud"]
+    prov_default = prov_options.index(lcfg.get("provider", "ollama-local")) \
+        if lcfg.get("provider", "ollama-local") in prov_options else 0
+    provider = st.selectbox("Provider", prov_options, index=prov_default,
+                            help="ollama-local: your machine (no key). "
+                                 "ollama-cloud: https://ollama.com/api (needs API key).")
+    if provider == "ollama-cloud":
+        model_default = lcfg.get("cloud_model", "gemma4:31b")
+        import os as _os
+        env_key = (_os.environ.get("OLLAMA_API_KEY") or "").strip() or (lcfg.get("api_key") or "").strip()
+        model = st.text_input("Cloud model", value=model_default)
+        if env_key:
+            st.caption("API key loaded from environment — no need to paste it.")
+            api_key = None  # server resolves it from OLLAMA_API_KEY env
+        else:
+            api_key_in = st.text_input("API key", value="", type="password",
+                                       placeholder="paste OLLAMA_API_KEY (not stored)",
+                                       help="Sent only with this request, never written to disk.")
+            api_key = api_key_in.strip() or None
+    else:
+        model = st.text_input("Local model",
+                              value=lcfg.get("local_model",
+                                             (cfg.get("ollama", {}) or {}).get("model", "llama3.1:8b")))
+        api_key = None
+        st.caption(f"via `{(cfg.get('ollama', {}) or {}).get('base_url', 'http://localhost:11434')}` — no key needed.")
+    question = st.text_input("Question", placeholder="e.g. Who approved Home Loan LN30002?")
+    if st.button("Ask", type="primary") and (question or "").strip():
+        from src.rag import answer_question
+        store = make_store(cfg)
+        try:
+            store.connect()
+        except Exception:
+            store = None
+        with st.spinner("Retrieving facts + asking the model ..."):
+            try:
+                res = answer_question(question, cfg=cfg, store=store,
+                                      provider=provider, model=(model or None),
+                                      api_key=api_key)
+            except (ConnectionError, RuntimeError, ValueError) as exc:
+                st.error(f"RAG failed: {exc}")
+                res = None
+            finally:
+                if store is not None:
+                    try:
+                        store.close()
+                    except Exception:
+                        pass
+        if res:
+            st.write(res["answer"])
+            st.caption(f"provider: {res.get('provider')} | retrieval: {res['retrieval']} | "
+                       f"model: {res['model']} | facts: {len(res['facts'])}")
+            for i, f in enumerate(res["facts"], 1):
+                with st.expander(f"[{i}] {f.get('subject')} — {f.get('predicate')} — {f.get('object')}"):
+                    st.caption(f"doc {f.get('source_document') or f.get('document')} "
+                               f"p.{f.get('page_number') or f.get('page')} "
+                               f"| conf {float(f.get('confidence', 0.5)):.2f}")
+                    st.write(f.get("evidence"))

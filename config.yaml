@@ -4,7 +4,30 @@ min_text_length: 5
 ocr_warning_threshold_chars: 50
 entity_resolution:
   similarity_threshold: 0.85
+  use_fuzzy: true
   case_sensitive: false
+validation:
+  min_confidence: 0.0  # below -> review_status=uncertain (kept, flagged)
+events:
+  enabled: false  # true -> first-class Event nodes for dated, linked relations
+  min_confidence: 0.6
+  max_events: 500
+coref:
+  enabled: false  # optional: pip install fastcoref, then set true (pronoun linking)
+ner:
+  backend: spacy  # optional future: gliner (pip install gliner, set SPACY_MODEL accordingly)
+ollama:
+  base_url: ${OLLAMA_BASE_URL:-http://localhost:11434}
+  model: ${OLLAMA_MODEL:-llama3.1:8b}
+  timeout_seconds: 120
+  top_k: 8
+  max_context_chars: 4000
+llm:
+  provider: ${LLM_PROVIDER:-ollama-local}  # ollama-local | ollama-cloud
+  local_model: ${OLLAMA_MODEL:-llama3.1:8b}
+  cloud_model: ${CLOUD_MODEL:-gemma4:31b}
+  cloud_base_url: ${CLOUD_BASE_URL:-https://ollama.com/api}
+  api_key: ${OLLAMA_API_KEY:-}  # or pass per-request; never logged
 neo4j:
   uri: ${NEO4J_URI:-bolt://localhost:7687}
   username: ${NEO4J_USERNAME:-neo4j}
@@ -16,9 +39,19 @@ neo4j:
 extraction:
   use_noun_chunks: true
   min_noun_chunk_tokens: 1
-  max_noun_chunk_tokens: 6
+  max_noun_chunk_tokens: 4
+  max_entity_chars: 80
+  drop_entity_types: [CARDINAL, ORDINAL, QUANTITY, PERCENT, DATE, TIME, MONEY]
+  drop_predicates: [be, have, do, get, exist]
+  min_relation_tokens: 3
   normalize_relation: true
 outputs:
   dir: outputs
   export_csv: true
   export_json: true
+qdrant:
+  url: ${QDRANT_URL:-http://localhost:6333}
+  embed_model: ${EMBED_MODEL:-nomic-embed-text}
+  embed_base_url: ${EMBED_BASE_URL:-http://localhost:11434}
+  enabled: ${QDRANT_ENABLED:-true}
+  hybrid_top_k: 8

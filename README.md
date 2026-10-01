@@ -15,7 +15,7 @@ All three are written in simple language. Start with `architecture.md`.
 ```
 PDF files -> pypdf (page segments w/ provenance) -> spaCy en_core_web_lg (nlp.pipe)
   -> entity extraction -> dependency-based relation candidates
-  -> conservative entity resolution -> NetworkX (optional) -> Neo4j (persistent)
+  -> entity resolution (canonical + alias + rapidfuzz) -> NetworkX (optional) -> Neo4j (persistent)
   -> queries + CSV/JSON exports
 ```
 
@@ -32,19 +32,25 @@ PDF files -> pypdf (page segments w/ provenance) -> spaCy en_core_web_lg (nlp.pi
 ├── data/input/             # drop PDFs here (or upload via the web UI)
 ├── outputs/                # entities/relationships CSV + JSON after runs
 ├── docs/                   # architecture.md, hld.md, lld.md
-├── frontend/app.py         # Streamlit web UI (Upload / Documents / Explore)
+├── frontend/app.py         # Streamlit web UI (Upload / Documents / Explore / Ask)
 ├── src/
 │   ├── config.py           # settings loader (YAML + environment)
 │   ├── pdf_processor.py    # page-by-page text extraction with provenance
 │   ├── nlp_processor.py    # spaCy model loading + batch parsing
-│   ├── entity_extractor.py # NER + noun-phrase mentions
+│   ├── entity_extractor.py # NER + noun-phrase mentions (canonical normalization)
 │   ├── relationship_extractor.py  # grammar triples (SVO, prep, passive, neg)
-│   ├── entity_resolver.py  # duplicate merging, stable IDs
+│   ├── entity_resolver.py  # canonical + alias + rapidfuzz merging, stable IDs
+│   ├── relationship_extractor.py  # (see above)
+│   ├── validate.py         # dedup + contradiction flags + confidence tiers + dates
+│   ├── events.py           # opt-in first-class Event nodes (events.enabled)
+│   ├── vector_store.py     # Qdrant evidence index (Ollama embeddings, idempotent)
 │   ├── graph_builder.py    # link triples to nodes, stats
 │   ├── neo4j_store.py      # write / delete / clear in Neo4j
-│   ├── graph_queries.py    # ready-made read queries
-│   ├── exporter.py         # CSV + JSON exports
-│   └── pipeline.py         # runs all stages in order
+│   ├── graph_queries.py    # ready-made read queries (incl. review queue)
+│   ├── exporter.py         # CSV + JSON exports (entities/relationships/events)
+│   ├── rag.py              # GraphRAG retrieval + Ollama answering (read-only)
+│   ├── api.py              # FastAPI: /healthz /readyz /metrics, /ingest, /ask
+│   └── pipeline.py         # runs all stages in order (manifest + validate + events)
 └── tests/                  # unit tests (mocked) + opt-in live Neo4j test
 ```
 
@@ -82,7 +88,7 @@ docker compose down
 
 ## Frontend (upload / delete in the browser)
 
-A Streamlit app at **http://localhost:8501** with three tabs:
+A Streamlit app at **http://localhost:8501** with four tabs:
 
 ```bash
 docker compose up -d neo4j frontend
@@ -94,6 +100,9 @@ docker compose up -d neo4j frontend
   per-document entity/relation counts. **Delete** removes the file *and* that
   document's Neo4j data (two-step confirm).
 - **Explore** — per-document relations with evidence sentences, plus entity search.
+- **Ask** — GraphRAG Q&A over the graph (provider dropdown: `ollama-local`
+  no-key, or `ollama-cloud` with per-request API key; answers cite evidence
+  facts, `POST /ask` is the API equivalent).
 
 Delete semantics (see `Neo4jStore.delete_document`): only data exclusive to that
 document is removed — relations solely from it, its `Document` node, and entities
@@ -119,8 +128,17 @@ python main.py --check-neo4j
 | Key | Meaning |
 |---|---|
 | `NEO4J_URI` | `bolt://neo4j:7687` inside compose, `bolt://localhost:7687` locally |
-| `entity_resolution.similarity_threshold` | fuzzy threshold (fuzzy off by default) |
+| `entity_resolution.similarity_threshold` | rapidfuzz token_set threshold (default 0.85) |
+| `entity_resolution.use_fuzzy` | fuzzy merge on/off (default `true`) |
 | `extraction.use_noun_chunks` | capture non-NER concepts |
+
+Entity resolution is 3-stage: (1) exact canonical match
+(`The ABC Bank Ltd.` / `ABC Bank's` → `abc bank`, `Dr. Sharma` → `sharma`),
+(2) always-on alias merge (subset `Priya` → `Priya Singh`, acronyms
+`NSF` → `National Science Foundation`, `NOUN_PHRASE` ↔ typed bridging),
+(3) opt-out fuzzy merge via `rapidfuzz` token_set_ratio + shared-token guard.
+Different real types (`ORG` vs `PERSON`) never merge; generic singletons
+(`bank`, `company`) never merge by subset alone.
 
 ## Neo4j Schema (domain-independent)
 
@@ -209,17 +227,116 @@ docker compose run --rm app --pdf data/input/fictional_bank_annual_operations_re
 pytest -v
 # live Neo4j integration (needs running DB):
 RUN_NEO4J_TESTS=1 pytest tests/test_neo4j_integration.py -v
+# quality gates (needs outputs/*.json from a pipeline run):
+python main.py --input data/input/ --no-neo4j --force
+python scripts/eval_quality.py
+# before/after comparison (eval/baseline = pre-improvement snapshot):
+python scripts/eval_fabric.py
+# multi-domain generalization (healthcare/legal/research/education/logistics):
+python -m pytest tests/test_multidomain.py -v
 ```
 
 Synthetic multi-domain fixtures (business, healthcare, education, research, legal) are generated on the fly in `tests/conftest.py` with reportlab.
+
+## Production runbook
+
+```bash
+cp .env.example .env   # set NEO4J_PASSWORD, BACKUP_DIR
+docker compose build   # required after requirements/config changes
+docker compose up -d neo4j
+docker compose run --rm app --check-neo4j
+
+# re-ingest (required after filter changes — IDs/shape changed):
+docker compose run --rm app --clear-neo4j
+docker compose run --rm app --input data/input/        # skips unchanged PDFs; add --force to reprocess
+python scripts/eval_quality.py   # gates: NOUN_PHRASE<=0.85, no be/have/do, no numeric nodes
+
+docker compose up -d frontend    # http://localhost:8501, Neo4j Browser :7474
+docker compose up -d api         # http://localhost:8000: /healthz /readyz /metrics, POST /ingest
+```
+
+* Incremental ingest: content hashes in `outputs/.ingest_manifest.json`;
+  unchanged PDFs skip automatically (`--force` overrides). Config changes
+  invalidate the manifest (filter change => reprocess).
+* Qdrant (`docker compose up -d qdrant`, embeddings via host Ollama
+  `nomic-embed-text`): semantic half of hybrid GraphRAG; indexed idempotently
+  per ingest, scrubbed per document on delete.
+* Review queue: every relation carries `confidence` (0..1 heuristic) +
+  `review_status` (`verified/candidate/uncertain/contradicted`) in Neo4j +
+  exports — weakest-first via `weakest_relationships()`, contradictions
+  never silently merged.
+* Boilerplate: repeated header/footer lines (≥3 pages) are stripped before
+  NLP; scanned PDFs set `needs_ocr=True`.
+* Backup: `./scripts/backup.ps1` (Windows) or `./scripts/backup.sh` (bash)
+  tars the `neo4j_data` volume into `./backups`.
+* Monitoring: `/healthz` (alive), `/readyz` (Neo4j reachable), `/metrics`
+  (entity/relation counts + avg confidence); `docker compose ps/logs`.
+* Image runs as non-root `appuser` with a `HEALTHCHECK`. Default-password
+  use logs a warning — set a strong `NEO4J_PASSWORD`.
+* Optional next models (not installed by default): `pip install fastcoref`
+  + `coref.enabled: true` for pronouns; `GLiNER`/transformer NER via
+  `SPACY_MODEL`. See `config.yaml`.
+
+## GraphRAG (local or cloud LLM, RAG only)
+
+Extraction stays spaCy/grammar — the LLM never writes to the graph. At ask
+time we retrieve top-k subgraph facts (Neo4j, falling back to
+`outputs/*.json`) and send them with a grounding prompt to your chosen model.
+
+Provider selection (Ask tab, or `POST /ask` with `provider`/`model`/`api_key`):
+
+| Provider | Endpoint | Key | Default model |
+|---|---|---|---|
+| `ollama-local` | your host (`localhost`, or `host.docker.internal` in Docker) | none | `llama3.1:8b` |
+| `ollama-cloud` | `https://ollama.com/api` | `OLLAMA_API_KEY` | `gemma4:31b` |
+
+```bash
+ollama pull llama3.1:8b
+docker compose up -d api          # POST /ask  {"question": "..."}
+docker compose up -d frontend     # "Ask" tab: provider dropdown + model + key field
+```
+
+Cloud setup: create a key at ollama.com, then either set `OLLAMA_API_KEY`
+in `.env` or paste it in the Ask tab per question (sent only with that
+request, never written to disk or logs). Notes: cloud uses the same model
+names as the library (`gemma4:31b`, no `-cloud` suffix needed) but speaks
+the `/api/chat` endpoint (local uses `/api/generate`) — handled
+automatically; and keep `OLLAMA_BASE_URL` unset in `.env` so containers
+resolve `host.docker.internal` for local while cloud uses
+`https://ollama.com/api`.
+
+Knobs in `config.yaml:ollama` (`OLLAMA_BASE_URL`, `OLLAMA_MODEL`,
+`top_k`, `max_context_chars`). Default is `llama3.1:8b` (accurate at
+subject/object attribution; measured correct with citation on the sample
+corpus). Drop to `OLLAMA_MODEL=llama3.2:3b` for speed — it answers faster
+but fumbles attribution questions. Every answer ships with its evidence
+facts, so verify from source.
+
+Troubleshooting `RAG failed: Connection refused`: keep `OLLAMA_BASE_URL`
+**unset** in `.env` — local code defaults to `localhost:11434` while
+containers need `host.docker.internal:11434` (compose default). Pinning it
+to `localhost` in `.env` breaks RAG inside Docker. Also ensure
+`ollama serve` is running and the model is pulled (`ollama list`).
+
+* Scanned PDFs: pipeline flags `needs_ocr=True` and continues with available
+  text. Pre-process with OCRmyPDF/tesseract, then re-ingest.
+* Backup: Neo4j data lives in the `neo4j_data` volume (`./backups` is mounted
+  at `/backups`). Stop writes, then `docker run --rm -v kg_data:/data -v
+  ./backups:/backups alpine tar czf /backups/neo4j-$(date +%F).tgz /data`.
+* Monitoring: `docker compose ps`, `docker compose logs --tail=100 neo4j app
+  frontend`; log rotation (10m×3) and `restart: unless-stopped` are baked in.
+* Image runs as non-root `appuser` with a `HEALTHCHECK`.
+* Next for scale: `fastcoref` pronouns, `GLiNER` domain NER, embedding dedup,
+  Wikidata linking, async workers + GraphRAG search.
 
 ## Limitations (read before trusting output)
 
 - Relationships are **candidates** from grammar, not verified facts. `review_status='candidate'`.
 - Dependency parsing misses cross-sentence relations, coreference ("it", "the center"), and complex clauses.
-- NER misses rare/domain terms; noun chunks compensate but add noise (`NOUN_PHRASE`).
-- Entity resolution is conservative: exact normalized match by default; enable `use_fuzzy` cautiously.
-- Scanned PDFs need OCR (we log a warning when extractable text is near-zero).
+- NER misses rare/domain terms; noun chunks compensate but add noise (`NOUN_PHRASE` — bridged to typed entities when alias/fuzzy matches).
+- Entity resolution is 3-stage (canonical + alias always, rapidfuzz fuzzy when `use_fuzzy: true`). Still no coreference (`he`/`it`/`the company`) and no cross-document acronyms without shared tokens — `fastcoref` + embeddings are the next step.
+- Numeric/date/money labels (`CARDINAL`, `DATE`, `MONEY`, ...) are dropped as nodes by default (`drop_entity_types`); copula verbs (`be/have/do/...`) are dropped as relations (`drop_predicates`). Tune both in `config.yaml`.
+- Scanned PDFs set `needs_ocr=True` (see runbook for the OCRmyPDF pre-process step).
 - Large PDFs are slower on CPU; `en_core_web_lg` ~500MB.
 
 ## Sample Output

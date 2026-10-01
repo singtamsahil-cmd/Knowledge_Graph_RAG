@@ -13,8 +13,18 @@ def get_all_relationships(session, limit: int = 1000):
         "MATCH (a:Entity)-[r]->(b:Entity) "
         "RETURN a.name AS subject, type(r) AS relation, r.predicate AS predicate, b.name AS object, "
         "r.relation_type AS relation_type, r.evidence AS evidence, "
-        "r.source_document AS source_document, r.page_number AS page_number "
+        "r.source_document AS source_document, r.page_number AS page_number, "
+        "coalesce(r.confidence, 0.5) AS confidence "
         "LIMIT $limit", limit=limit))
+
+
+def weakest_relationships(session, limit: int = 50):
+    """Review queue: lowest-confidence relations first."""
+    return list(session.run(
+        "MATCH (a:Entity)-[r]->(b:Entity) "
+        "RETURN a.name AS subject, r.predicate AS predicate, b.name AS object, "
+        "coalesce(r.confidence, 0.5) AS confidence, r.evidence AS evidence "
+        "ORDER BY confidence ASC LIMIT $limit", limit=limit))
 
 
 def search_entities_by_name(session, name: str, limit: int = 25):
@@ -44,7 +54,8 @@ def graph_for_document(session, document: str):
         "MATCH (a:Entity)-[r]->(b:Entity) "
         "WHERE r.source_document = $doc OR $doc IN coalesce(r.source_documents, []) "
         "RETURN a.name AS subject, r.predicate AS predicate, b.name AS object, "
-        "r.evidence AS evidence, r.page_number AS page_number", doc=document))
+        "r.evidence AS evidence, r.page_number AS page_number, "
+        "coalesce(r.confidence, 0.5) AS confidence", doc=document))
 
 
 def list_documents(session):
@@ -63,3 +74,12 @@ def evidence_for_relationship(session, subject_id: str, object_id: str, predicat
         "MATCH (a:Entity {id: $sid})-[r {predicate: $pred}]->(b:Entity {id: $oid}) "
         "RETURN r.evidence AS evidence, r.source_documents AS documents, r.pages AS pages",
         sid=subject_id, oid=object_id, pred=predicate))
+
+
+def events_for_entity(session, entity_id: str, limit: int = 25):
+    """Event nodes an entity participates in (role + date), newest first."""
+    return list(session.run(
+        "MATCH (e:Entity {id: $eid})-[r:PARTICIPATED_IN]->(v:Event) "
+        "RETURN v.name AS event, v.event_type AS type, v.event_date AS date, "
+        "r.role AS role, v.evidence AS evidence "
+        "ORDER BY v.event_date DESC LIMIT $limit", eid=entity_id, limit=limit))

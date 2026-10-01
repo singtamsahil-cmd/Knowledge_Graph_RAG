@@ -29,33 +29,42 @@ def link_relations_to_entities(relations: list[CandidateRelation],
 
 
 def ensure_endpoint_entities(relations: list[CandidateRelation],
-                             resolved: list[ResolvedEntity]) -> list[ResolvedEntity]:
-    """Create minimal NOUN_PHRASE entities for unlinked endpoints so no evidence is lost."""
+                             resolved: list[ResolvedEntity],
+                             max_chars: int = 80) -> list[ResolvedEntity]:
+    """Create minimal NOUN_PHRASE entities for unlinked endpoints so no evidence is lost.
+
+    Production guard: skip numeric / over-long endpoints instead of
+    materializing sentence-chunks as nodes. Such relations keep IDs None
+    and are reported in stats (not silently dropped, not node-spammed).
+    """
     from .entity_resolver import deterministic_id
 
-    existing_norms = {e.normalized_name for e in resolved}
-    id_map = {e.id: e for e in resolved}
     out = list(resolved)
     for r in relations:
         for text, attr in ((r.subject_text, "subject_id"), (r.object_text, "object_id")):
+            if getattr(r, attr):
+                continue
             norm = normalize_name(text)
-            if not getattr(r, attr):
-                match = next((e for e in out if e.normalized_name == norm), None)
-                if match is None:
-                    eid = deterministic_id(norm, "NOUN_PHRASE")
-                    match = ResolvedEntity(
-                        id=eid, name=text, normalized_name=norm,
-                        entity_type="NOUN_PHRASE", mentions=[text],
-                        documents=[r.document], pages=[r.page_number],
-                        sentences=[r.sentence],
-                    )
-                    out.append(match)
-                else:
-                    if r.document not in match.documents:
-                        match.documents.append(r.document)
-                    if r.page_number not in match.pages:
-                        match.pages.append(r.page_number)
-                setattr(r, attr, match.id)
+            if not norm or len(text.strip()) > max_chars:
+                continue
+            if norm.replace(" ", "").replace(",", "").replace(".", "").isdigit():
+                continue
+            match = next((e for e in out if e.normalized_name == norm), None)
+            if match is None:
+                eid = deterministic_id(norm, "NOUN_PHRASE")
+                match = ResolvedEntity(
+                    id=eid, name=text, normalized_name=norm,
+                    entity_type="NOUN_PHRASE", mentions=[text],
+                    documents=[r.document], pages=[r.page_number],
+                    sentences=[r.sentence],
+                )
+                out.append(match)
+            else:
+                if r.document not in match.documents:
+                    match.documents.append(r.document)
+                if r.page_number not in match.pages:
+                    match.pages.append(r.page_number)
+            setattr(r, attr, match.id)
     return out
 
 
@@ -77,8 +86,13 @@ def build_networkx_graph(resolved: list[ResolvedEntity],
 
 
 def graph_stats(resolved, relations) -> dict:
+    from collections import Counter
+    type_counts = dict(Counter(getattr(e, "entity_type", "?") for e in resolved))
     return {
         "num_entities": len(resolved),
         "num_relations": len(relations),
         "linked_relations": sum(1 for r in relations if r.subject_id and r.object_id),
+        "unlinked_relations": sum(1 for r in relations if not (r.subject_id and r.object_id)),
+        "entity_types": type_counts,
+        "noun_phrase_ratio": round(type_counts.get("NOUN_PHRASE", 0) / max(len(resolved), 1), 3),
     }

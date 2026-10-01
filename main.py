@@ -26,6 +26,8 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--no-export", action="store_true", help="Skip CSV/JSON exports.")
     p.add_argument("--clear-neo4j", action="store_true",
                    help="Delete application-managed Neo4j data (Entity/Document/relationships) and exit.")
+    p.add_argument("--force", action="store_true",
+                   help="Reprocess even PDFs unchanged since last ingest (skip manifest).")
     return p
 
 
@@ -58,7 +60,8 @@ def main(argv=None) -> int:
         return 2
 
     result = run_pipeline(pdf=args.pdf, input_dir=args.input, cfg=cfg,
-                          write_to_neo4j=not args.no_neo4j, export=not args.no_export)
+                          write_to_neo4j=not args.no_neo4j, export=not args.no_export,
+                          force=args.force)
     stats = result["stats"]
     print("Pipeline complete.")
     for k, v in stats.items():

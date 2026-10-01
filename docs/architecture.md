@@ -53,16 +53,18 @@ together with the sentence itself as proof (called **evidence**).
 There are two ways to use the system (terminal or web page), but both run the
 same pipeline and write to the same Neo4j database.
 
-## 3. The three Docker services
+## 3. The Docker services
 
-The system runs as three separate programs (called **services**) managed by
+The system runs as separate programs (called **services**) managed by
 Docker Compose. Each service does one job:
 
 | Service    | What it is                        | Port | Job |
 |------------|-----------------------------------|------|-----|
 | `neo4j`    | Neo4j 5 Community database        | 7474 (browser), 7687 (data) | Stores the graph permanently |
+| `qdrant`   | Qdrant vector index               | 6333 | Semantic search over relation evidence |
 | `app`      | Python batch program (`main.py`)  | none | Processes PDFs from the terminal |
 | `frontend` | Streamlit web page (`frontend/app.py`) | 8501 | Upload, browse, and delete PDFs in a browser |
+| `api` | FastAPI (`src/api.py`) | 8000 | Health/readiness, metrics, ingest trigger, GraphRAG |
 
 Important rules of this design:
 
@@ -81,12 +83,16 @@ Important rules of this design:
 
 ## 4. How data flows (the pipeline)
 
-Every PDF goes through the same 8 stages, in order:
+Every PDF goes through the same 9 stages, in order:
 
-1. **Collect** — find the PDF file(s) to process (`collect_pdfs`).
+1. **Collect** — find the PDF file(s) to process (`collect_pdfs`),
+   skipping files unchanged since last ingest via content hashes in
+   `outputs/.ingest_manifest.json` (`--force` overrides).
 2. **Extract text** — read the PDF page by page with pypdf. Every chunk of
    text remembers its document name and page number. Empty pages are kept and
-   reported, never silently dropped (`pdf_processor.py`).
+   reported, never silently dropped; repeated header/footer lines (≥3 pages)
+   are stripped as boilerplate; near-zero-text PDFs are flagged
+   `needs_ocr=True` (`pdf_processor.py`).
 3. **Language analysis** — run the text through spaCy (`en_core_web_lg`) in
    batches. Each page becomes a parsed document with words, sentences, entity
    labels, and grammar links (`nlp_processor.py`).
@@ -94,15 +100,28 @@ Every PDF goes through the same 8 stages, in order:
    MONEY, ...) plus useful noun phrases spaCy did not label, e.g. "financial
    services" (`entity_extractor.py`).
 5. **Find relations** — look at the grammar of each sentence and pull out
-   subject–verb–object triples such as `Rahul Sharma —borrow from→ ABC Bank`.
-   Every triple keeps its sentence as evidence (`relationship_extractor.py`).
-6. **Merge duplicates** — "ABC Bank", "abc bank", and "Abc Bank" are the same
-   thing. Group them into one node with one stable ID, but remember every
-   original spelling (`entity_resolver.py`).
-7. **Link and store** — connect each relation's two ends to the merged nodes
+    subject–verb–object triples such as `Rahul Sharma —borrow from→ ABC Bank`.
+    Every triple keeps its sentence as evidence plus a `confidence` score
+    (0..1 heuristic: verb specificity + endpoint shape), stored in Neo4j and
+    exports for the review queue (`relationship_extractor.py`).
+6. **Merge duplicates** — canonical normalization + alias + fuzzy merge
+   into one node with one stable ID, remembering every original spelling
+   (`entity_resolver.py`). Example: `"The ABC Bank Ltd."`, `"ABC Bank's"`,
+   `"ABC Bank"` → `abc bank`; `"Dr. Sharma"` → `sharma`;
+   `"Priya"` → `"Priya Singh"` (subset alias);
+   `"NSF"` → `"National Science Foundation"` (acronym);
+   `NOUN_PHRASE "ABC Bank"` bridges into `ORG "ABC Bank"`.
+7. **Validate** — drop evidence-less relations, merge exact duplicates,
+   flag contradictions (affirmed-vs-negated, approved-vs-pending on the same
+   target) and tier confidence into `verified/candidate/uncertain/contradicted`
+   (`validate.py`). Dates in evidence attach as `event_date`.
+8. **Link and store** — connect each relation's two ends to the merged nodes
    and write nodes + arrows into Neo4j (`graph_builder.py` + `neo4j_store.py`).
-8. **Export (optional)** — also save `entities` and `relationships` as CSV and
-   JSON files in `outputs/` for spreadsheets or other tools (`exporter.py`).
+   Optionally build first-class `Event` nodes (`events.enabled`) with
+   `PARTICIPATED_IN` edges. Evidence points are upserted into Qdrant
+   (`vector_store.py`, embeddings from host Ollama `nomic-embed-text`).
+9. **Export (optional)** — also save `entities`, `relationships` (and `events`
+   when enabled) as CSV and JSON files in `outputs/` (`exporter.py`).
 
 The pipeline function is `run_pipeline()` in `src/pipeline.py`. Both the
 terminal program and the web page call it — there is only one implementation,
@@ -110,18 +129,23 @@ so both behave identically.
 
 ## 5. How the graph looks in Neo4j
 
-Three kinds of items exist in the database:
+Five kinds of items exist across the stores (three in Neo4j, one opt-in, one in Qdrant):
 
 - **`Entity` nodes** — one per real-world thing. Example properties:
   `name: "Rahul Sharma"`, `entity_type: "PERSON"`, plus the list of documents
   it appeared in. The node ID (`id: "entity_..."`) is unique and stable: the
-  same name always gets the same ID, so re-running a PDF never creates
-  duplicates.
+  same canonical name always gets the same ID, so re-running a PDF never creates
+  duplicates. Canonical = lowercase, no articles/honorifics/possessives, no
+  trailing Corp/Inc/Ltd suffixes.
 - **Relationship arrows** — one per extracted fact. The arrow's *type* is the
   predicate itself: `:WORK_AT`, `:APPROVE`, `:BORROW_FROM`, `:BELONG_TO`.
   That is why Neo4j Browser labels edges with the real relation text. All the
-  details (evidence sentences, source document, page, negation flag) live in
-  the arrow's properties.
+  details (evidence sentences, source document, page, negation flag,
+  confidence, event_date, review_status) live in the arrow's properties.
+- **`Event` nodes** (opt-in via `events.enabled`) — dated occurrences with
+  `PARTICIPATED_IN` edges carrying subject/object roles.
+- **Qdrant points** — one vector per relation evidence (`kg_evidence`
+  collection, deterministic UUID ids), the semantic half of hybrid retrieval.
 - **`Document` nodes** — one per PDF, connected to its entities with
   `:CONTAINS` arrows. These exist so the system always knows *which file* each
   fact came from, which is what makes per-document delete possible.
@@ -152,10 +176,14 @@ Example (exactly as stored):
   (negation, sarcasm, complex clauses). Every arrow carries
   `review_status: "candidate"` and its evidence sentence, so a human can
   always check *why* the system claims something.
-- **Conservative merging.** Two mentions merge only on exact normalized match
-  by default. Merging "ABC Bank" with "ABC Finance" just because the names
-  look similar would corrupt the graph, so fuzzy merging is off unless you
-  explicitly enable it.
+- **3-stage merging (safe → risky).** (1) Exact canonical match
+  (`The ABC Bank Ltd.` → `abc bank`). (2) Always-on alias merge:
+  subset (`Priya` → `Priya Singh`), acronyms (`NSF` → its full name),
+  `NOUN_PHRASE` ↔ typed bridging. (3) Fuzzy merge via `rapidfuzz`
+  token_set_ratio + shared-token guard (on by default, `use_fuzzy: true`,
+  threshold 0.85). Different real types never merge; generic singletons
+  (`bank`, `company`) never merge by subset alone — so `ABC Bank` and
+  `ABC Finance` stay separate.
 - **Surgical delete.** Entities can be shared between documents, so deleting
   one PDF removes only what came solely from it and scrubs shared items,
   instead of blindly deleting nodes other documents still need.

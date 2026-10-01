@@ -34,6 +34,11 @@ because humans count pages from 1), `text`, plus `char_count`, `is_empty`
 `--input` (must be a folder, else `NotADirectoryError`), de-duplicated by
 resolved path so passing both never processes a file twice.
 
+Boilerplate/OCR: `process_pdfs` runs `_strip_boilerplate` (repeated
+header/footer lines seen on ≥3 pages are removed before NLP) and flags
+near-zero-text PDFs `needs_ocr=True` (scanned-image sign; processing
+continues with available text, the log recommends OCRmyPDF/tesseract).
+
 **`process_pdfs(paths, ocr_threshold)`** — runs `extract_pdf_pages` per file,
 returns the flat list of all segments plus per-file summaries, and logs
 totals (files, pages, empty pages).
@@ -58,9 +63,13 @@ you the exact install command.
 
 ## 3. `entity_extractor.py` — finding things
 
-**`normalize_name(text)`** — collapse all whitespace to single spaces,
-strip ends, lowercase. `"  ABC   Bank "` → `"abc bank"`. This is the key used
-for all comparisons.
+**`normalize_name(text)`** — canonical form for matching (display text is
+untouched). Steps: lowercase, unicode-quote fix, strip surrounding
+quotes/brackets, remove possessive `'s`, punctuation → space, collapse spaces,
+strip leading articles/honorifics (`the`, `dr`, `mr`, ...), strip trailing
+corp suffixes (`corp`, `inc`, `ltd`, `llc`, `pvt`, `company`, ... — loops so
+`pvt ltd` fully strips). `"  The ABC Bank Ltd. "` → `"abc bank"`,
+`"Dr. Sharma"` → `"sharma"`.
 
 **`extract_entities_from_doc(doc, document, page_number, ...)`** — two passes:
 
@@ -72,8 +81,9 @@ can avoid it.
 
 *Pass 2 — noun chunks.* For each `chunk` in `doc.noun_chunks` (spaCy's guess
 at "a thing described by several words", e.g. "financial services"), keep it
-only if ALL of these hold: token count within `[min, max]` (default 1–6,
-ignoring punctuation), text at least 2 characters, NOT made only of stopwords
+only if ALL of these hold: token count within `[min, max]` (default 1–4 per
+`config.yaml`, ignoring punctuation), at most 80 characters
+(`max_entity_chars`), text at least 2 characters, NOT made only of stopwords
 ("the", "a") or pronouns ("he", "it"), and NOT overlapping a pass-1 entity.
  survivors are stored with type `"NOUN_PHRASE"` and method
 `"spacy_noun_chunk"`. This catches useful concepts NER misses, without
@@ -123,30 +133,63 @@ verb/AUX token in the sentence:
    ("by ...") child and emit agent → verb → subject, so "X was approved by
    the board" yields `board —approve→ X`.
 
-Sentences with fewer than 3 real tokens are skipped up front.
+Sentences with fewer than 3 real tokens are skipped up front. Three extras:
+`_title_relations` emits `PERSON —title→ Role` from "Role Name ..." subjects
+(`Priya Nair —title→ Customer Service Lead`, conf 0.85);
+`_resolve_demonstrative` maps "this account/loan/case/..." to the nearest ID
+code (`CA20001`, `LN30002`) in the current + previous 2 sentences;
+copula `be` is kept only for amount-like objects (`INR 1,200,000`), with the
+nearest ID code appended to generic subjects (`The sanctioned amount (LN30002)`).
 
 ## 5. `entity_resolver.py` — merging duplicates
 
 **`deterministic_id(normalized, entity_type)`** — `sha256("ORG||abc bank")`,
-first 12 hex chars, prefixed: `"entity_..."`. Same input → same ID across
-runs and machines. No database lookup needed, no randomness.
+first 12 hex chars, prefixed: `"entity_..."`. Same canonical input → same ID
+across runs and machines. No database lookup needed, no randomness. IDs are
+refreshed after merging so the survivor's ID reflects its final canonical form.
 
-**`resolve_entities(mentions, threshold, use_fuzzy)`** — group by the exact
-key `(normalized_name, entity_type)`. "ABC Bank"/ORG and "abc bank"/ORG merge;
-"Apple"/ORG and "apple"/PRODUCT do not (different type = possibly different
-things). Per group it accumulates: all spellings (`mentions`), documents,
-pages, sentences; the display `name` is the longest spelling seen (most
-informative), demoted spellings move to `alternative_names`.
+**`resolve_entities(mentions, threshold=0.85, use_fuzzy=False)`** — 3 stages:
 
-**Fuzzy merging (off by default)** — only when `use_fuzzy=True`, pairs of the
-same type with `SequenceMatcher` similarity ≥ threshold merge, and ONLY if
-they also share at least one meaningful word (`_content_tokens` drops "the",
-"of", "and", ...). So "ABC Bank" / "ABC Banking Corp" may merge, but "ABC
-Bank" / "XYZ Bank" never do (no shared content word... "Bank" is shared —
-the similarity score then decides; the threshold stays high at 0.85).
+1. Exact canonical group-by `(normalize_name(text), entity_type)`.
+   Re-normalizes from `text` (not trusting stored `normalized_name`), so
+   `"Acme Corp"` + `"Acme Corporation"` land in one group (`acme`).
+2. Alias merge (always): `_is_alias` merges compatible types
+   (same type, or `NOUN_PHRASE` ↔ anything) when content-token sets are
+   subset (`priya` ⊂ `priya singh`) or acronyms match
+   (`nsf` = initials of `national science foundation`). Single generic tokens
+   (`bank`, `company`, `center`, ...) never merge by subset alone.
+   Survivor keeps the longest name, prefers real types over `NOUN_PHRASE`.
+3. Fuzzy merge (only `use_fuzzy=True`, default on via `config.yaml`):
+   `rapidfuzz` `max(ratio, token_set_ratio)` ≥ threshold AND at least one
+   shared content token (`_content_tokens` drops stopwords). So
+   `"ABC Bank"` / `"ABC Banking"` may merge, but `"ABC Bank"` / `"XYZ Bank"`
+   score too low / share only `bank` + low similarity → stay separate.
+   Falls back to `difflib.SequenceMatcher` when rapidfuzz is missing.
 
-**`build_mention_index(resolved)`** — dictionary from every known spelling
-(normalized) to node ID, so relation ends can be matched to nodes.
+**`build_mention_index(resolved)`** — dictionary from every known spelling to
+node ID: canonical normalized form PLUS raw lowercased text, PLUS bare ID
+codes found in mentions (`Current Account CA20001` → `ca20001`), covering
+`alternative_names` + `mentions`. Relation ends like `"the ABC Bank"` or
+`"CA20001"` therefore link without extra code.
+
+## 5b. `validate.py`, `events.py`, `vector_store.py` (new)
+
+**Validation** (`validate_relations`): drops evidence-less relations, merges
+exact duplicates (keeping max confidence), flags affirmed-vs-negated and
+approved-vs-pending conflicts as `contradicted`, tiers the rest by
+confidence+linkage into `verified/candidate/uncertain` (all kept, none
+silently lost). `attach_temporal` stamps `event_date` from DATE mentions or
+explicit calendar dates in the evidence sentence.
+
+**Events** (`build_events`, gated by `events.enabled`): dated + linked +
+confident relations yield deterministic-ID `Event` nodes with subject/object
+`PARTICIPATED_IN` roles; original relations are kept. Neo4j merges on event
+ID (history preserved), delete scrubs per-document events.
+
+**Vectors** (`vector_store.py`): Qdrant `kg_evidence` collection (cosine,
+768d), embeddings from host Ollama `nomic-embed-text` (threaded), point IDs
+are deterministic UUID5 (idempotent re-ingest), per-document   delete supported.
+
 
 ## 6. `graph_builder.py` — connecting triples to nodes
 
@@ -239,11 +282,20 @@ entities_scrubbed / orphan_entities_deleted`. Shared data always survives.
 `Entity` and `Document` nodes. Only called from `--clear-neo4j`, never
 automatically.
 
-## 8. `graph_queries.py` — reading (8 helpers)
+**Events storage** — `store(entities, relations, events=None)` also merges
+`Event` nodes (deterministic IDs, history-preserving union of
+documents/evidence) plus `PARTICIPATED_IN` edges carrying subject/object
+roles; `delete_document` scrubs per-document events the same way it scrubs
+relations.
+
+## 8. `graph_queries.py` — reading (10 helpers)
 
 All take a session, all parameterized, none specify an arrow type (so every
 predicate type matches): `get_all_entities`, `get_all_relationships` (also
-returns `type(r)` so callers see the edge label), `search_entities_by_name`
+returns `type(r)` so callers see the edge label, plus `confidence`),
+`weakest_relationships` (lowest-confidence first — the review queue),
+`events_for_entity` (Event nodes an entity participates in, newest first),
+`search_entities_by_name`
 (case-insensitive substring), `find_relationships_for_entity`,
 `entity_neighborhood` (paths of length 1–2 with node names + predicates),
 `graph_for_document` (arrows from one doc, either source field),
@@ -256,17 +308,19 @@ returns `type(r)` so callers see the edge label), `search_entities_by_name`
 
 **`export_all`** — flattens nodes/triples into dict rows (lists joined with
 `|` for CSV) and writes `entities.json`, `relationships.json`,
-`entities.csv`, `relationships.csv` into `outputs/` (created if missing).
-Returns the written paths.
+`entities.csv`, `relationships.csv` into `outputs/` (created if missing),
+plus `events.json` when events are passed. Returns the written paths.
 
-**`run_pipeline`** — the 10-stage order from the HLD; `write_to_neo4j=False`
+**`run_pipeline`** — the 12-stage order from the HLD; `write_to_neo4j=False`
 and `export=False` flags skip storing/exporting (used by `--no-neo4j`,
-`--no-export`, and the frontend, which exports nothing). Returns
+`--no-export`, and the frontend Upload tab, which stores but exports
+nothing); `force=True` overrides the incremental-manifest skip. Returns
 `{stats, entities, relations, pdf_results, exported}`.
 
 **`main.py` flags** — `--pdf` (one file), `--input` (folder),
 `--config` (custom yaml), `--check-neo4j` (connectivity test + exit),
-`--no-neo4j`, `--no-export`, `--clear-neo4j` ( unités: wipe + exit).
+`--no-neo4j`, `--no-export`, `--clear-neo4j` (wipe + exit),
+`--force` (reprocess even unchanged PDFs).
 Exit codes: 0 ok, 1 connection failed, 2 no input given.
 
 **`frontend/app.py`** — helpers: `get_config` (cached), `make_store`,
@@ -276,7 +330,10 @@ Exit codes: 0 ok, 1 connection failed, 2 no input given.
 the node exists). Tabs: Upload (skip existing filenames, per-file spinner +
 stats, then `st.rerun`), Documents (two-step delete via `st.session_state`
 confirm keys, unique button keys per row), Explore (doc selectbox → relation
-expanders with evidence; entity search box → dataframe). Sidebar shows
+expanders with evidence + confidence badges; entity search box → dataframe),
+Ask (provider/model/question inputs → `rag.answer_question` with Neo4j store
+when reachable, else JSON fallback; answers rendered with cited fact
+expanders). Sidebar shows
 connection status and live counts. If Neo4j is unreachable the page stops
 with an error message instead of crashing.
 
@@ -306,8 +363,9 @@ healthcare, education, research, legal) with reportlab, once per session.
 `test_entity_extractor` (every domain yields entities with doc/page/sentence;
 noun chunks catch non-NER concepts), `test_relationship_extractor` (SVO
 fields + evidence, negation flag, passive, fragment → no relations),
-`test_entity_resolver` (exact merge, type separation, no fuzzy by default,
-index), `test_pipeline` (linking + placeholders, parameterized store calls,
+`test_entity_resolver` (canonical merge `acme`, Corp/Corporation merge without
+fuzzy, distinct names stay separate, alias subset + NOUN_PHRASE bridge,
+acronym `NSF`, generic-singleton guard, type separation, index), `test_pipeline` (linking + placeholders, parameterized store calls,
 sanitizer incl. injection, per-type edge query), `test_delete_document`
 (5 statements, 4 doc-scoped, result keys), `test_neo4j_integration` (live,
 only with `RUN_NEO4J_TESTS=1`).

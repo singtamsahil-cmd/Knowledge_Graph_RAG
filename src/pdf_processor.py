@@ -29,6 +29,7 @@ class PDFResult:
     num_pages: int = 0
     empty_pages: int = 0
     error: str | None = None
+    needs_ocr: bool = False  # True when text is near-zero: scanned PDF, run OCR sidecar first
 
 
 def extract_pdf_pages(pdf_path: str | Path, ocr_threshold: int = 50) -> PDFResult:
@@ -62,9 +63,11 @@ def extract_pdf_pages(pdf_path: str | Path, ocr_threshold: int = 50) -> PDFResul
     result.empty_pages = sum(1 for s in result.segments if s.is_empty)
     total_chars = sum(s.char_count for s in result.segments)
     if result.num_pages > 0 and total_chars < ocr_threshold:
+        result.needs_ocr = True
         log.warning(
             "PDF %s has only %d extractable chars across %d pages. OCR may be required "
-            "(scanned document?).",
+            "(scanned document?). Pre-process with OCRmyPDF/tesseract, then re-ingest. "
+            "Flagged needs_ocr=True, processing continues with available text.",
             pdf_path.name, total_chars, result.num_pages,
         )
     return result
@@ -92,6 +95,40 @@ def collect_pdfs(pdf: str | Path | None, input_dir: str | Path | None) -> list[P
     return unique
 
 
+def _strip_boilerplate(segments: list[PageSegment], min_repeat: int = 3,
+                         min_chars: int = 20) -> list[PageSegment]:
+    """Drop repeated header/footer lines (high avg mentions came from these).
+
+    Counts normalized non-empty lines across all pages; removes lines that
+    repeat verbatim on >= min_repeat pages. Short lines (< min_chars) are
+    never stripped to avoid killing legit short sentences.
+    """
+    from collections import Counter
+    from dataclasses import replace
+
+    counts: Counter[str] = Counter()
+    for s in segments:
+        for line in (s.text or "").splitlines():
+            t = " ".join(line.split()).strip().lower()
+            if len(t) >= min_chars:
+                counts[t] += 1
+    repeated = {t for t, c in counts.items() if c >= min_repeat}
+    if not repeated:
+        return segments
+    out = []
+    dropped = 0
+    for s in segments:
+        kept = [ln for ln in (s.text or "").splitlines()
+                if " ".join(ln.split()).strip().lower() not in repeated]
+        dropped += (len((s.text or "").splitlines()) - len(kept))
+        out.append(replace(s, text="\n".join(kept)))
+    for s in out:
+        s.char_count = len((s.text or "").strip())
+        s.is_empty = s.char_count == 0
+    log.info("Boilerplate filter dropped %d repeated lines.", dropped)
+    return out
+
+
 def process_pdfs(paths: list[Path], ocr_threshold: int = 50) -> tuple[list[PageSegment], list[PDFResult]]:
     segments: list[PageSegment] = []
     results: list[PDFResult] = []
@@ -99,6 +136,7 @@ def process_pdfs(paths: list[Path], ocr_threshold: int = 50) -> tuple[list[PageS
         r = extract_pdf_pages(p, ocr_threshold=ocr_threshold)
         results.append(r)
         segments.extend(r.segments)
+    segments = _strip_boilerplate(segments)
     log.info("Processed %d PDFs, %d pages (%d empty).", len(results),
              sum(r.num_pages for r in results), sum(r.empty_pages for r in results))
     return segments, results

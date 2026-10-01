@@ -1,0 +1,53 @@
+{
+  "baseline": {
+    "entities": 427,
+    "relations": 187,
+    "entity_types": {
+      "ORG": 46,
+      "NOUN_PHRASE": 339,
+      "FAC": 5,
+      "PRODUCT": 4,
+      "PERSON": 21,
+      "EVENT": 1,
+      "LOC": 2,
+      "GPE": 5,
+      "LAW": 3,
+      "WORK_OF_ART": 1
+    },
+    "dup_relation_rate": 0.0107,
+    "provenance_coverage": 1.0,
+    "review_status": {
+      "candidate": 187
+    },
+    "contradicted": 0,
+    "avg_confidence": 0.789,
+    "with_event_date": 0
+  },
+  "current": {
+    "entities": 416,
+    "relations": 172,
+    "entity_types": {
+      "ORG": 46,
+      "NOUN_PHRASE": 328,
+      "FAC": 5,
+      "PRODUCT": 4,
+      "PERSON": 21,
+      "EVENT": 1,
+      "LOC": 2,
+      "GPE": 5,
+      "LAW": 3,
+      "WORK_OF_ART": 1
+    },
+    "dup_relation_rate": 0.0,
+    "provenance_coverage": 1.0,
+    "review_status": {
+      "verified": 107,
+      "candidate": 65
+    },
+    "contradicted": 0,
+    "avg_confidence": 0.79,
+    "with_event_date": 38
+  },
+  "delta_relations": -15,
+  "delta_entities": -11
+}

@@ -19,6 +19,7 @@ log = logging.getLogger(__name__)
 
 CONSTRAINT_CYPHER = "CREATE CONSTRAINT entity_id_unique IF NOT EXISTS FOR (e:Entity) REQUIRE e.id IS UNIQUE"
 DOC_CONSTRAINT = "CREATE CONSTRAINT document_name_unique IF NOT EXISTS FOR (d:Document) REQUIRE d.name IS UNIQUE"
+EVENT_CONSTRAINT = "CREATE CONSTRAINT event_id_unique IF NOT EXISTS FOR (v:Event) REQUIRE v.id IS UNIQUE"
 
 MERGE_ENTITY = """
 MERGE (e:Entity {id: $id})
@@ -84,6 +85,23 @@ WHERE size(coalesce(e.documents, [])) = 0 AND NOT (e)--()
 DETACH DELETE e
 """
 
+MERGE_EVENT = """
+MERGE (v:Event {id: $id})
+ON CREATE SET v.name = $name, v.event_type = $etype, v.event_date = $date,
+              v.documents = $documents, v.evidence = [$evidence]
+ON MATCH SET v.documents = CASE WHEN $doc IN coalesce(v.documents, []) THEN coalesce(v.documents, [])
+                                ELSE coalesce(v.documents, []) + [$doc] END,
+             v.evidence = CASE WHEN $evidence IN coalesce(v.evidence, []) THEN coalesce(v.evidence, [])
+                               ELSE coalesce(v.evidence, []) + [$evidence] END
+"""
+
+LINK_EVENT_PARTICIPANT = """
+MATCH (e:Entity {id: $eid})
+WITH e
+MATCH (v:Event {id: $vid})
+MERGE (e)-[r:PARTICIPATED_IN {role: $role}]->(v)
+"""
+
 def sanitize_rel_type(relation_type: str | None) -> str:
     """Turn a normalized predicate (e.g. "WORK_AT") into a safe Neo4j type name.
 
@@ -111,13 +129,16 @@ MERGE (a)-[r:`{t}` {{predicate: $predicate, negated: $negated}}]->(b)
 ON CREATE SET r.relation_type = $rtype, r.evidence = [$evidence],
               r.source_document = $doc, r.source_documents = [$doc],
               r.page_number = $page, r.pages = [$page],
-              r.extraction_method = $method, r.review_status = $status
+              r.extraction_method = $method, r.review_status = $status,
+              r.confidence = $confidence, r.event_date = $event_date
 ON MATCH SET r.evidence = CASE WHEN $evidence IN coalesce(r.evidence, []) THEN coalesce(r.evidence, [])
                                ELSE coalesce(r.evidence, []) + [$evidence] END,
              r.source_documents = CASE WHEN $doc IN coalesce(r.source_documents, []) THEN coalesce(r.source_documents, [])
                                ELSE coalesce(r.source_documents, []) + [$doc] END,
              r.pages = CASE WHEN $page IN coalesce(r.pages, []) THEN coalesce(r.pages, [])
-                               ELSE coalesce(r.pages, []) + [$page] END
+                               ELSE coalesce(r.pages, []) + [$page] END,
+             r.confidence = CASE WHEN $confidence > coalesce(r.confidence, 0.0) THEN $confidence
+                                 ELSE coalesce(r.confidence, $confidence) END
 """
 
 
@@ -175,18 +196,21 @@ class Neo4jStore:
         with self._driver.session(database=self.database) as session:
             session.run(CONSTRAINT_CYPHER).consume()
             session.run(DOC_CONSTRAINT).consume()
+            session.run(EVENT_CONSTRAINT).consume()
         log.info("Neo4j constraints ensured.")
 
     def _session(self):
         return self._driver.session(database=self.database)
 
-    def store(self, entities, relations) -> dict:
+    def store(self, entities, relations, events=None) -> dict:
         self.init_db()
         n_nodes = self._store_entities(entities)
         n_rels = self._store_relations(relations)
+        n_events = self._store_events(events or [])
         self._link_documents(entities)
-        log.info("Wrote %d entities and %d relations to Neo4j.", n_nodes, n_rels)
-        return {"entities_written": n_nodes, "relations_written": n_rels}
+        log.info("Wrote %d entities, %d relations, %d events to Neo4j.", n_nodes, n_rels, n_events)
+        return {"entities_written": n_nodes, "relations_written": n_rels,
+                "events_written": n_events}
 
     def _store_entities(self, entities) -> int:
         count = 0
@@ -227,7 +251,27 @@ class Neo4jStore:
                             predicate=r.predicate, rtype=r.relation_type,
                             evidence=r.sentence, doc=r.document, page=r.page_number,
                             method=r.extraction_method, status=r.review_status,
+                            confidence=float(getattr(r, "confidence", 0.5)),
+                            event_date=getattr(r, "event_date", None),
                             negated=r.negated)
+                count += 1
+        return count
+
+    def _store_events(self, events) -> int:
+        count = 0
+        with self._session() as session:
+            for v in events:
+                doc = v.documents[0] if v.documents else "unknown"
+                ev = v.sentences[0] if v.sentences else ""
+                session.run(MERGE_EVENT, id=v.id, name=v.name, etype=v.event_type,
+                            date=v.event_date, documents=v.documents or [],
+                            doc=doc, evidence=ev)
+                for p in v.participants:
+                    try:
+                        session.run(LINK_EVENT_PARTICIPANT, eid=p["entity_id"],
+                                    vid=v.id, role=p.get("role", "participant"))
+                    except Exception as exc:
+                        log.warning("Event link failed %s -> %s: %s", p.get("entity_id"), v.id, exc)
                 count += 1
         return count
 
@@ -262,6 +306,15 @@ class Neo4jStore:
             counts["entities_scrubbed"] = res.counters.properties_set
             res = session.run(DELETE_ORPHAN_ENTITIES).consume()
             counts["orphan_entities_deleted"] = res.counters.nodes_deleted
+            res = session.run(
+                "MATCH (v:Event) WHERE $doc IN coalesce(v.documents, []) "
+                "SET v.documents = [d IN coalesce(v.documents, []) WHERE d <> $doc]",
+                doc=doc_name).consume()
+            counts["events_scrubbed"] = res.counters.properties_set
+            res = session.run(
+                "MATCH (v:Event) WHERE size(coalesce(v.documents, [])) = 0 "
+                "DETACH DELETE v").consume()
+            counts["orphan_events_deleted"] = res.counters.nodes_deleted
         log.warning("Deleted document '%s' from Neo4j: %s", doc_name, counts)
         return counts
 
@@ -270,5 +323,6 @@ class Neo4jStore:
         with self._session() as session:
             session.run("MATCH (e:Entity)-[r]-() DELETE r").consume()
             session.run("MATCH (e:Entity) DETACH DELETE e").consume()
+            session.run("MATCH (v:Event) DETACH DELETE v").consume()
             session.run("MATCH (d:Document) DETACH DELETE d").consume()
-        log.warning("Cleared application-managed Neo4j data (Entity/Document/relationships).")
+        log.warning("Cleared application-managed Neo4j data (Entity/Event/Document/relationships).")

@@ -19,11 +19,16 @@ does that job.
 | `entity_extractor.py` | Finds things (NER + noun phrases) | parsed docs | `ExtractedEntity` mentions |
 | `relationship_extractor.py` | Finds subject–verb–object triples from grammar | parsed docs | `CandidateRelation` triples |
 | `entity_resolver.py` | Merges duplicate mentions into one node each | mentions | `ResolvedEntity` nodes + mention index |
+| `validate.py` | Pre-store gate: dedup, contradictions, confidence tiers, dates | triples | validated triples + report |
+| `events.py` | First-class Event nodes for dated, linked relations (gated) | triples | `Event` list |
+| `vector_store.py` | Qdrant evidence index (Ollama embeddings, idempotent) | triples | index counts |
 | `graph_builder.py` | Connects triples to nodes, builds stats/graph | nodes + triples | linked triples, counts, NetworkX graph |
 | `neo4j_store.py` | Writes to / deletes from Neo4j | nodes + triples | write/delete reports |
-| `graph_queries.py` | Ready-made read queries | a DB session + filters | rows (entities, relations, evidence) |
-| `exporter.py` | Saves CSV + JSON copies | nodes + triples | file paths in `outputs/` |
-| `pipeline.py` | Runs all of the above in order | PDF path(s) + flags | stats + nodes + triples |
+| `graph_queries.py` | Ready-made read queries (incl. weakest-first review queue) | a DB session + filters | rows (entities, relations, evidence) |
+| `exporter.py` | Saves CSV + JSON copies (incl. confidence, plus events.json) | nodes + triples (+ events) | file paths in `outputs/` |
+| `pipeline.py` | Runs all of the above in order (dedup, incremental manifest, stats) | PDF path(s) + flags | stats + nodes + triples |
+| `api.py` | FastAPI: `/healthz /readyz /metrics`, `POST /ingest`, `POST /ask` (GraphRAG) | HTTP | JSON |
+| `rag.py` | GraphRAG: keyword retrieval (Neo4j → JSON fallback) + selectable LLM (`ollama-local` no-key, `ollama-cloud` Bearer key) | question + store | answer + evidence facts |
 
 On top of these sit two user interfaces that only *call* the modules:
 
@@ -39,7 +44,9 @@ The modules pass three simple data containers between each other:
    plus `is_empty` / `error` flags so bad pages are visible, never hidden.
 
 2. **`ExtractedEntity`** (`entity_extractor.py`) — one mention of one thing.
-   Fields: original `text`, `normalized_name` (lowercased, single spaces),
+   Fields: original `text`, `normalized_name` (canonical: lowercase, no
+   articles/honorifics/possessives, no trailing Corp/Inc/Ltd suffixes —
+   e.g. `The ABC Bank Ltd.` → `abc bank`, `Dr. Sharma` → `sharma`),
    `entity_type` (spaCy label like `PERSON`, or `NOUN_PHRASE`), `document`,
    `page_number`, the full `sentence` it came from, and character offsets.
 
@@ -63,25 +70,42 @@ appeared.
 
 1. **Collect** (`collect_pdfs`) — accept one `--pdf` file and/or one `--input`
    folder; return a de-duplicated list of PDF paths. Missing paths raise a
-   clear error immediately.
+   clear error immediately. Unchanged files (content hash in
+   `outputs/.ingest_manifest.json` + matching config fingerprint) are
+   skipped; `--force` overrides.
 2. **Extract** (`process_pdfs`) — `extract_pdf_pages` per file → flat list of
-   `PageSegment`s plus per-file summaries (page count, empty pages).
+   `PageSegment`s plus per-file summaries (page count, empty pages,
+   `needs_ocr` flag; repeated header/footer lines stripped as boilerplate).
 3. **Parse** (`process_segments_nlp`) — one spaCy model load, then `nlp.pipe`
    over all non-empty pages. Empty pages yield `(segment, None)` so their
    provenance survives even though there is nothing to parse.
 4. **Entities** (`extract_entities`) — NER mentions first, then noun chunks
-   that do not overlap them.
-5. **Relations** (`extract_relationships`) — grammar triples per sentence.
-6. **Resolve** (`resolve_entities`) — group mentions into nodes.
+   that do not overlap them (numeric/date/money types dropped as nodes by
+   default via `drop_entity_types`).
+5. **Relations** (`extract_relationships`) — grammar triples per sentence
+   (copula/aux verbs dropped by default via `drop_predicates`), each with a
+   `confidence` score (0..1 heuristic).
+6. **Resolve** (`resolve_entities`) — 3 stages: exact canonical match,
+   always-on alias merge (subset/acronym + `NOUN_PHRASE` ↔ typed bridging),
+   then rapidfuzz fuzzy merge when `use_fuzzy: true`.
 7. **Link** (`link_relations_to_entities`, then `ensure_endpoint_entities`,
    then link again) — match triple ends to nodes; create minimal
    `NOUN_PHRASE` nodes for ends that matched nothing, so no evidence is lost.
-8. **Store** (`Neo4jStore.store`) — write nodes, arrows, and document links;
-   return counts. Skipped with `--no-neo4j`.
-9. **Export** (`export_all`) — write the four CSV/JSON files. Skipped with
-   `--no-export`.
-10. **Stats** (`graph_stats` + a throwaway NetworkX graph) — summarize what
-    happened for the logs and the UI.
+8. **Validate** (`attach_temporal`, `validate_relations`) — attach `event_date`
+   from evidence, drop evidence-less relations, merge exact duplicates, flag
+   contradictions (`contradicted`), tier the rest into
+   `verified/candidate/uncertain` (all kept).
+9. **Events** (`build_events`, only when `events.enabled: true`) — dated +
+   linked + confident relations yield deterministic-ID `Event` nodes;
+   original relations are kept.
+10. **Store** (`Neo4jStore.store`) — write nodes, arrows, events, and document
+    links; return counts. Skipped with `--no-neo4j`. Relation evidence is
+    also indexed into Qdrant (`vector_store.index_relations`, best-effort
+    sidecar; Neo4j stays source of truth).
+11. **Export** (`export_all`) — write `entities` + `relationships` CSV/JSON
+    (plus `events.json` when events exist). Skipped with `--no-export`.
+12. **Stats** (`graph_stats` + a throwaway NetworkX graph) — summarize what
+    happened for the logs, the UI, and `/metrics`.
 
 `check_neo4j(cfg)` is a tiny separate function: connect, say OK/FAILED.
 
@@ -92,8 +116,8 @@ appeared.
   predicate (`:WORK_AT`, `:APPROVE`, `:BORROW_FROM`, `:BELONG_TO`, ... —
   the type is simply the normalized predicate).
 - **Identity:** `Entity.id` is unique (database constraint) and deterministic
-  — same normalized name + type always yields the same ID, so re-processing a
-  PDF updates instead of duplicating. `Document.name` is unique too.
+  — same canonical name + resolved type always yields the same ID, so
+  re-processing a PDF updates instead of duplicating. `Document.name` is unique too.
 - **Deduplication:** writing the same fact twice merges into one arrow and
   only appends new evidence sentences / documents / pages.
 - **Provenance:** every arrow stores its evidence sentences, source
@@ -103,7 +127,7 @@ appeared.
 
 ## 5. Frontend design (HLD view)
 
-`frontend/app.py` (Streamlit, port 8501) has three tabs and a sidebar:
+`frontend/app.py` (Streamlit, port 8501) has four tabs and a sidebar:
 
 - **Sidebar** — Neo4j connection status; live counts of documents, entities,
   relations; link to Neo4j Browser.
@@ -117,7 +141,12 @@ appeared.
   `delete_document_everywhere`: remove the file if present, then
   `Neo4jStore.delete_document` if the node exists.
 - **Explore tab** — pick a stored document, see its relations with evidence
-  sentences in expandable rows; plus a free-text entity search box.
+  sentences in expandable rows (confidence badge per row); plus a free-text
+  entity search box.
+- **Ask tab** — GraphRAG Q&A: provider dropdown (`ollama-local`, no key, vs
+  `ollama-cloud` with per-request API key), model + question inputs; answers
+  come only from retrieved graph facts with evidence citations
+  (`src/rag.py:answer_question`, same as `POST /ask`).
 
 The frontend holds no state of its own except the per-row delete
 confirmations; everything else is read fresh from disk + Neo4j on every page
@@ -154,16 +183,18 @@ everything flows through this one loader, so Docker, local runs, and tests
 all configure the same way.
 
 Main knobs: spaCy model, NLP batch size, OCR-warning threshold, noun-chunk
-length limits, entity-resolution threshold + fuzzy on/off, Neo4j connection +
-retry policy + write batch size, and output toggles (CSV/JSON).
+length limits, entity-resolution threshold + `use_fuzzy` (rapidfuzz on/off,
+default on), Neo4j connection + retry policy + write batch size, and output
+toggles (CSV/JSON).
 
 ## 8. Testing strategy (HLD view)
 
 - **Unit tests** (default, no database needed): synthetic PDFs are generated
   on the fly with reportlab across five domains (business, healthcare,
   education, research, legal). They cover page provenance, entity extraction,
-  relation extraction incl. negation/passive/fragments, conservative
-  resolution rules, graph linking, store query structure (mocked driver), and
+   relation extraction incl. negation/passive/fragments, 3-stage
+   resolution (canonical, alias subset/acronym/NOUN_PHRASE-bridge, rapidfuzz
+   fuzzy), graph linking, store query structure (mocked driver), and
   the delete flow (mocked driver).
 - **Integration test** (opt-in): `RUN_NEO4J_TESTS=1` runs a live round-trip
   against a real Neo4j.
